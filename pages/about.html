@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About the Company — [COMPANY NAME]</title>
+    <meta
+      name="description"
+      content="Company story, manufacturing capabilities, quality control process, certifications and global presence of [COMPANY NAME]."
+    />
+    <meta property="og:title" content="About the Company — [COMPANY NAME]" />
+    <meta
+      property="og:description"
+      content="Manufacturing capabilities, quality control and global reach."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="about.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script>
+      try {
+        var s = localStorage.getItem("site-theme");
+        document.documentElement.setAttribute(
+          "data-theme",
+          s ||
+            (matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light"),
+        );
+        var l = localStorage.getItem("site-lang");
+        if (l) {
+          document.documentElement.lang = l;
+          document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body data-page="about" data-title-key="about.title">
+    <a class="skip-link" href="#main" data-i18n="nav.skip"
+      >Skip to main content</a
+    >
+    <header class="header" id="site-header"></header>
+    <div class="drawer" id="site-drawer" aria-hidden="true"></div>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="page-hero__media">
+          <img
+            src="assets/images/factory-hero.jpg"
+            alt=""
+            width="1920"
+            height="1088"
+          />
+        </div>
+        <div class="container page-hero__inner">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html" data-i18n="breadcrumb.home"></a
+            ><span class="sep">›</span><span data-i18n="nav.about"></span>
+          </nav>
+          <p class="eyebrow" data-i18n="about.eyebrow"></p>
+          <h1 data-i18n="about.title"></h1>
+          <p data-i18n="about.lead"></p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container editorial">
+          <div class="editorial__media" data-reveal>
+            <img
+              src="assets/images/factory-production.jpg"
+              alt="Production line"
+              loading="lazy"
+              width="1600"
+              height="1104"
+            />
+          </div>
+          <div data-reveal>
+            <h2 data-i18n="about.storyTitle"></h2>
+            <p data-i18n="about.storyP1"></p>
+            <p data-i18n="about.storyP2"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--alt">
+        <div class="container grid grid--3">
+          <div data-reveal>
+            <p class="eyebrow" data-i18n="about.missionTitle"></p>
+            <p class="lead" data-i18n="about.mission"></p>
+          </div>
+          <div data-reveal>
+            <p class="eyebrow" data-i18n="about.visionTitle"></p>
+            <p class="lead" data-i18n="about.vision"></p>
+          </div>
+          <div data-reveal>
+            <p class="eyebrow" data-i18n="about.valuesTitle"></p>
+            <p class="lead" data-i18n="about.values"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow" data-i18n="about.capTitle"></p>
+            <h2 data-i18n="about.capTitle"></h2>
+            <p data-i18n="about.capText"></p>
+          </div>
+        </div>
+        <div
+          class="container editorial"
+          style="margin-bottom: var(--section-y)"
+        >
+          <div class="editorial__media" data-reveal>
+            <img
+              src="assets/images/factory-production.jpg"
+              alt="Production lines"
+              loading="lazy"
+              width="1600"
+              height="1104"
+            />
+          </div>
+          <div data-reveal>
+            <h3
+              style="font-size: var(--fs-h3)"
+              data-i18n="about.cap1Title"
+            ></h3>
+            <p
+              class="muted"
+              style="margin-top: 1rem"
+              data-i18n="about.cap1Text"
+            ></p>
+          </div>
+        </div>
+        <div
+          class="container editorial editorial--reverse"
+          style="margin-bottom: var(--section-y)"
+        >
+          <div class="editorial__media" data-reveal>
+            <img
+              src="assets/images/quality-control.jpg"
+              alt="Quality inspection"
+              loading="lazy"
+              width="1600"
+              height="1104"
+            />
+          </div>
+          <div data-reveal>
+            <h3
+              style="font-size: var(--fs-h3)"
+              data-i18n="about.cap2Title"
+            ></h3>
+            <p
+              class="muted"
+              style="margin-top: 1rem"
+              data-i18n="about.cap2Text"
+            ></p>
+          </div>
+        </div>
+        <div class="container editorial">
+          <div class="editorial__media" data-reveal>
+            <img
+              src="assets/images/logistics.jpg"
+              alt="Warehouse and loading dock"
+              loading="lazy"
+              width="1600"
+              height="1104"
+            />
+          </div>
+          <div data-reveal>
+            <h3
+              style="font-size: var(--fs-h3)"
+              data-i18n="about.cap3Title"
+            ></h3>
+            <p
+              class="muted"
+              style="margin-top: 1rem"
+              data-i18n="about.cap3Text"
+            ></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--dark">
+        <div class="container">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow" data-i18n="quality.eyebrow"></p>
+            <h2 data-i18n="quality.title"></h2>
+            <p data-i18n="quality.text"></p>
+          </div>
+          <div class="process" data-reveal="fade">
+            <div class="process__step">
+              <h3 data-i18n="quality.s1"></h3>
+              <p data-i18n="quality.s1Text"></p>
+            </div>
+            <div class="process__step">
+              <h3 data-i18n="quality.s2"></h3>
+              <p data-i18n="quality.s2Text"></p>
+            </div>
+            <div class="process__step">
+              <h3 data-i18n="quality.s3"></h3>
+              <p data-i18n="quality.s3Text"></p>
+            </div>
+            <div class="process__step">
+              <h3 data-i18n="quality.s4"></h3>
+              <p data-i18n="quality.s4Text"></p>
+            </div>
+            <div class="process__step">
+              <h3 data-i18n="quality.s5"></h3>
+              <p data-i18n="quality.s5Text"></p>
+            </div>
+            <div class="process__step">
+              <h3 data-i18n="quality.s6"></h3>
+              <p data-i18n="quality.s6Text"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow" data-i18n="certs.eyebrow"></p>
+            <h2 data-i18n="certs.title"></h2>
+            <p data-i18n="certs.text"></p>
+          </div>
+          <div class="grid grid--4">
+            <div class="cert" data-reveal>
+              <span class="cert__mark">01</span>
+              <div>
+                <h3>[CERTIFICATION NAME]</h3>
+                <p>[CERTIFICATION DESCRIPTION]</p>
+              </div>
+            </div>
+            <div class="cert" data-reveal>
+              <span class="cert__mark">02</span>
+              <div>
+                <h3>[CERTIFICATION NAME]</h3>
+                <p>[CERTIFICATION DESCRIPTION]</p>
+              </div>
+            </div>
+            <div class="cert" data-reveal>
+              <span class="cert__mark">03</span>
+              <div>
+                <h3>[CERTIFICATION NAME]</h3>
+                <p>[CERTIFICATION DESCRIPTION]</p>
+              </div>
+            </div>
+            <div class="cert" data-reveal>
+              <span class="cert__mark">04</span>
+              <div>
+                <h3>[CERTIFICATION NAME]</h3>
+                <p>[CERTIFICATION DESCRIPTION]</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--alt">
+        <div class="container">
+          <div class="section-head" data-reveal>
+            <h2 data-i18n="about.whyTitle"></h2>
+          </div>
+          <div class="values">
+            <div class="value">
+              <span class="value__num">01</span>
+              <h3 data-i18n="about.why1"></h3>
+            </div>
+            <div class="value">
+              <span class="value__num">02</span>
+              <h3 data-i18n="about.why2"></h3>
+            </div>
+            <div class="value">
+              <span class="value__num">03</span>
+              <h3 data-i18n="about.why3"></h3>
+            </div>
+            <div class="value">
+              <span class="value__num">04</span>
+              <h3 data-i18n="about.why4"></h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--dark">
+        <div class="container cta" data-reveal>
+          <h2 data-i18n="finalCta.title"></h2>
+          <p data-i18n="finalCta.text"></p>
+          <div class="cta__actions">
+            <a class="btn" href="contact.html" data-i18n="cta.contact"></a>
+            <a
+              class="btn btn--onDark"
+              href="products.html"
+              data-i18n="cta.explore"
+            ></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="site-footer"></footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+    <script type="module" src="../js/main.js"></script>
+  </body>
+</html>

@@ -1,3 +1,7 @@
+/* ==========================================================================
+   1. DATA & CONSTANTS
+   ========================================================================== */
+
 /**
  * Product categories. Add or remove entries freely — every layout is data driven.
  * `name` / `description` keys resolve against translations (`categories.<id>.*`).
@@ -96,6 +100,9 @@ export const company = {
   ],
 };
 
+/**
+ * Shared image assets.
+ */
 export const images = {
   hero: "assets/images/factory-hero.jpg",
   production: "assets/images/factory-production.jpg",
@@ -104,10 +111,13 @@ export const images = {
 };
 
 /**
- * News / What's New articles. Multilingual fields keyed by language code.
+ * Helper function for multilingual fields (English, Arabic, Spanish, Russian).
  */
 const P = (en, ar) => ({ en, ar, es: en, ru: en });
 
+/**
+ * News / What's New articles.
+ */
 export const news = [
   {
     id: 1,
@@ -220,8 +230,7 @@ export const news = [
 ];
 
 /**
- * Product catalogue. Multilingual fields are objects keyed by language code.
- * Only `en` is required; missing languages fall back to `en`.
+ * Product catalogue helpers & construction.
  */
 const L = (en, ar) => ({ en, ar: ar || en, es: en, ru: en });
 
@@ -280,6 +289,9 @@ const baseSpecs = (origin, moisture, purity) => [
   spec("Shelf life", "24 months", "مدة الصلاحية", "24 شهراً"),
 ];
 
+/**
+ * Products list.
+ */
 export const products = [
   /* ---------------- Herbs ---------------- */
   make(
@@ -605,11 +617,8 @@ export const products = [
 ];
 
 /**
- * Centralised translations.
- * Add a language by adding a new top-level key here and an entry in `languages`.
- * Text is bound in HTML with data-i18n="group.key".
+ * Supported languages configuration.
  */
-
 export const languages = [
   { code: "en", label: "English", short: "EN", dir: "ltr" },
   { code: "ar", label: "العربية", short: "AR", dir: "rtl" },
@@ -617,6 +626,9 @@ export const languages = [
   { code: "ru", label: "Русский", short: "RU", dir: "ltr" },
 ];
 
+/**
+ * Centralised translations dictionary.
+ */
 export const translations = {
   en: {
     meta: { suffix: "Nile Botanica" },
@@ -1737,405 +1749,13 @@ export const translations = {
   },
 };
 
-/**
- * animations.js — scroll reveals and viewport-triggered counters.
- * Everything is a no-op when the user prefers reduced motion.
- */
-
-import { formatNumber } from "./language.js";
-
-const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-export function initReveals(root = document) {
-  const targets = root.querySelectorAll("[data-reveal]:not(.is-revealed)");
-  if (!targets.length) return;
-
-  if (reduced.matches || !("IntersectionObserver" in window)) {
-    targets.forEach((el) => el.classList.add("is-revealed"));
-    return;
-  }
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-revealed");
-        io.unobserve(entry.target);
-      });
-    },
-    { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
-  );
-
-  targets.forEach((el, i) => {
-    if (!el.style.getPropertyValue("--reveal-delay")) {
-      const index = Number(el.dataset.revealIndex ?? i % 4);
-      el.style.setProperty("--reveal-delay", `${index * 90}ms`);
-    }
-    io.observe(el);
-  });
-}
-
-/** Counters animate once, only when scrolled into view. */
-export function initCounters(root = document) {
-  const counters = root.querySelectorAll("[data-count]");
-  if (!counters.length) return;
-
-  const render = (el, value) => {
-    el.textContent = formatNumber(value) + (el.dataset.suffix || "");
-  };
-
-  if (reduced.matches || !("IntersectionObserver" in window)) {
-    counters.forEach((el) => render(el, Number(el.dataset.count)));
-    return;
-  }
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        io.unobserve(el);
-        const target = Number(el.dataset.count) || 0;
-        const duration = 1400;
-        const start = performance.now();
-        const tick = (now) => {
-          const p = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          render(el, Math.round(target * eased));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      });
-    },
-    { threshold: 0.4 },
-  );
-
-  counters.forEach((el) => {
-    render(el, 0);
-    io.observe(el);
-  });
-}
+/* ==========================================================================
+   2. CORE MODULES & ENGINE
+   ========================================================================== */
 
 /**
- * catalogue.js — renders the downloadable catalogue index table from product data.
+ * Language Engine: translation, language persistence, and RTL/LTR switching.
  */
-import { products } from "../data/products.js";
-import { categories } from "../data/categories.js";
-import { t, pick } from "./language.js";
-
-export function initCatalogue() {
-  const body = document.querySelector("[data-catalogue-rows]");
-  if (!body) return;
-
-  const render = () => {
-    body.innerHTML = categories
-      .map((cat) => {
-        const rows = products
-          .filter((p) => p.category === cat.id)
-          .map(
-            (p) => `
-            <tr>
-              <td><a href="product-details.html?product=${p.slug}">${pick(p.name)}</a></td>
-              <td>${p.code}</td>
-              <td>${pick(p.specifications[0].value)}</td>
-              <td>${pick(p.packaging[0])}</td>
-            </tr>`,
-          )
-          .join("");
-        return `
-          <tr class="catalogue-group"><th colspan="4" data-i18n="categories.${cat.id}.name">${t(`categories.${cat.id}.name`)}</th></tr>
-          ${rows}`;
-      })
-      .join("");
-  };
-
-  render();
-  return render;
-}
-
-/**
- * contact.js — accessible client-side validation and submission handling.
- *
- * The form only reports success when `company.formEndpoint` is configured and
- * the request actually succeeds. With no endpoint it tells the user to reach
- * out directly instead of faking a submission.
- */
-
-import { company } from "../data/company.js";
-import { t } from "./language.js";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
-const PHONE_RE = /^[+()\-\s\d]{6,24}$/;
-
-function setError(field, message) {
-  const wrap = field.closest(".field");
-  const slot = wrap?.querySelector(".error");
-  wrap?.setAttribute("data-invalid", message ? "true" : "false");
-  field.setAttribute("aria-invalid", message ? "true" : "false");
-  if (slot) slot.textContent = message || "";
-}
-
-function validateField(field) {
-  const value = field.value.trim();
-  const name = field.name;
-  let message = "";
-
-  if (name === "name" && value.length < 2) message = t("form.errName");
-  if (name === "email" && !EMAIL_RE.test(value)) message = t("form.errEmail");
-  if (name === "phone" && value && !PHONE_RE.test(value))
-    message = t("form.errPhone");
-  if (name === "message" && value.length < 20) message = t("form.errMessage");
-
-  setError(field, message);
-  return !message;
-}
-
-export function initContactForm() {
-  const form = document.querySelector("[data-contact-form]");
-  if (!form) return;
-
-  const status = form.querySelector("[data-form-status]");
-  const submit = form.querySelector("[data-submit]");
-  const submitLabel = submit?.querySelector("span");
-
-  // Pre-fill the subject when arriving from a product inquiry CTA.
-  const product = new URLSearchParams(location.search).get("product");
-  const subject = form.querySelector('[name="subject"]');
-  if (product && subject && !subject.value)
-    subject.value = `Inquiry: ${product}`;
-
-  const showStatus = (type, message) => {
-    if (!status) return;
-    status.hidden = false;
-    status.dataset.type = type;
-    status.textContent = message;
-  };
-
-  form.querySelectorAll("input, textarea").forEach((field) => {
-    field.addEventListener("blur", () => {
-      if (field.value.trim()) validateField(field);
-    });
-    field.addEventListener("input", () => {
-      if (field.closest(".field")?.getAttribute("data-invalid") === "true")
-        validateField(field);
-    });
-  });
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    status && (status.hidden = true);
-
-    const required = [...form.querySelectorAll("[required], [name='phone']")];
-    const valid = required.map(validateField).every(Boolean);
-    if (!valid) {
-      form.querySelector('[aria-invalid="true"]')?.focus();
-      showStatus("error", t("form.errGeneric"));
-      return;
-    }
-
-    if (!company.formEndpoint) {
-      showStatus("info", t("form.notConfigured"));
-      return;
-    }
-
-    submit.disabled = true;
-    if (submitLabel) submitLabel.textContent = t("form.sending");
-
-    try {
-      const res = await fetch(company.formEndpoint, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
-      });
-      if (!res.ok) throw new Error("Request failed");
-      form.reset();
-      showStatus("success", t("form.success"));
-    } catch {
-      showStatus("error", t("form.errGeneric"));
-    } finally {
-      submit.disabled = false;
-      if (submitLabel) submitLabel.textContent = t("form.submit");
-    }
-  });
-}
-
-/**
- * gallery.js — data-driven filterable gallery with an accessible lightbox.
- */
-import { t } from "./language.js";
-
-export const galleryItems = [
-  {
-    src: "assets/images/cat-herbs.jpg",
-    group: "herbs",
-    caption: { en: "Dried chamomile & hibiscus", ar: "بابونج وكركديه مجفف" },
-  },
-  {
-    src: "assets/images/cat-spices.jpg",
-    group: "spices",
-    caption: { en: "Milled spice range", ar: "مجموعة التوابل المطحونة" },
-  },
-  {
-    src: "assets/images/cat-seeds.jpg",
-    group: "seeds",
-    caption: { en: "Sortex-cleaned seeds", ar: "بذور منظفة بالسورتكس" },
-  },
-  {
-    src: "assets/images/cat-dehydrated.jpg",
-    group: "dehydrated",
-    caption: { en: "Dehydrated vegetables", ar: "خضروات مجففة" },
-  },
-  {
-    src: "assets/images/factory-production.jpg",
-    group: "facility",
-    caption: { en: "Drying & milling hall", ar: "صالة التجفيف والطحن" },
-  },
-  {
-    src: "assets/images/quality-control.jpg",
-    group: "facility",
-    caption: { en: "In-house laboratory", ar: "المعمل الداخلي" },
-  },
-  {
-    src: "assets/images/logistics.jpg",
-    group: "facility",
-    caption: { en: "Export warehouse", ar: "مخزن التصدير" },
-  },
-  {
-    src: "assets/images/factory-hero.jpg",
-    group: "facility",
-    caption: { en: "Processing plant, Fayoum", ar: "مصنع المعالجة بالفيوم" },
-  },
-  {
-    src: "assets/images/product-01.jpg",
-    group: "herbs",
-    caption: { en: "Whole flower grading", ar: "فرز الزهور الكاملة" },
-  },
-  {
-    src: "assets/images/product-02.jpg",
-    group: "spices",
-    caption: { en: "Blending station", ar: "محطة الخلط" },
-  },
-  {
-    src: "assets/images/product-03.jpg",
-    group: "seeds",
-    caption: { en: "Seed cleaning line", ar: "خط تنظيف البذور" },
-  },
-  {
-    src: "assets/images/news-01.jpg",
-    group: "facility",
-    caption: { en: "Harvest season", ar: "موسم الحصاد" },
-  },
-];
-
-const GROUPS = ["all", "herbs", "spices", "seeds", "dehydrated", "facility"];
-
-function label(group) {
-  if (group === "all") return t("gallery.all");
-  if (group === "facility") return t("about.capTitle");
-  return t(`categories.${group}.name`);
-}
-
-export function initGallery() {
-  const filters = document.querySelector("[data-gallery-filters]");
-  const grid = document.querySelector("[data-gallery-grid]");
-  if (!grid) return;
-
-  let active = "all";
-  let visible = [];
-
-  const lang = document.documentElement.lang || "en";
-  const cap = (item) => item.caption[lang] || item.caption.en;
-
-  const render = () => {
-    visible = galleryItems.filter(
-      (i) => active === "all" || i.group === active,
-    );
-    grid.innerHTML = visible
-      .map(
-        (item, i) => `
-        <button type="button" class="gallery-item" data-index="${i}" data-reveal>
-          <img src="${item.src}" alt="${cap(item)}" loading="lazy" width="1200" height="900">
-          <span class="gallery-item__cap">${cap(item)}</span>
-        </button>`,
-      )
-      .join("");
-  };
-
-  if (filters) {
-    filters.innerHTML = GROUPS.map(
-      (g) =>
-        `<button type="button" class="chip${g === "all" ? " is-active" : ""}" data-group="${g}">${label(g)}</button>`,
-    ).join("");
-    filters.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-group]");
-      if (!btn) return;
-      active = btn.getAttribute("data-group");
-      filters
-        .querySelectorAll(".chip")
-        .forEach((c) => c.classList.toggle("is-active", c === btn));
-      render();
-    });
-  }
-
-  render();
-
-  /* ---- lightbox ---- */
-  const box = document.createElement("div");
-  box.className = "lightbox";
-  box.setAttribute("role", "dialog");
-  box.setAttribute("aria-modal", "true");
-  box.innerHTML = `
-    <button type="button" class="lightbox__close" data-close aria-label="Close">✕</button>
-    <button type="button" class="lightbox__nav lightbox__nav--prev" data-prev aria-label="Previous">‹</button>
-    <img alt="">
-    <button type="button" class="lightbox__nav lightbox__nav--next" data-next aria-label="Next">›</button>`;
-  document.body.appendChild(box);
-
-  const img = box.querySelector("img");
-  let index = 0;
-
-  const show = (i) => {
-    index = (i + visible.length) % visible.length;
-    img.src = visible[index].src;
-    img.alt = cap(visible[index]);
-  };
-  const open = (i) => {
-    show(i);
-    box.classList.add("is-open");
-    document.body.classList.add("is-locked");
-    box.querySelector("[data-close]").focus();
-  };
-  const close = () => {
-    box.classList.remove("is-open");
-    document.body.classList.remove("is-locked");
-  };
-
-  grid.addEventListener("click", (e) => {
-    const cell = e.target.closest("[data-index]");
-    if (cell) open(Number(cell.getAttribute("data-index")));
-  });
-  box.addEventListener("click", (e) => {
-    if (e.target.closest("[data-close]") || e.target === box) close();
-    if (e.target.closest("[data-next]")) show(index + 1);
-    if (e.target.closest("[data-prev]")) show(index - 1);
-  });
-  document.addEventListener("keydown", (e) => {
-    if (!box.classList.contains("is-open")) return;
-    if (e.key === "Escape") close();
-    if (e.key === "ArrowRight") show(index + 1);
-    if (e.key === "ArrowLeft") show(index - 1);
-  });
-}
-/**
- * language.js — translation engine, language persistence and RTL/LTR switching.
- *
- * Bind text with:   <span data-i18n="nav.home"></span>
- * Bind attributes:  <input data-i18n-attr="placeholder:products.searchPlaceholder">
- * Multiple attrs are comma separated.
- */
-
-import { translations, languages } from "../data/translations.js";
-
 const KEY = "site-lang";
 const FALLBACK = "en";
 const listeners = new Set();
@@ -2286,13 +1906,138 @@ export function initLanguage() {
 }
 
 /**
- * layout.js — renders the shared header, mobile drawer and footer so that
- * markup lives in exactly one place across all pages.
+ * Theme Engine: Light/Dark theme switching and state management.
  */
+const THEME_KEY = "site-theme";
+const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-import { company } from "../data/company.js";
-import { categories } from "../data/categories.js";
-import { getLanguages } from "./language.js";
+export function getTheme() {
+  return document.documentElement.getAttribute("data-theme") || "light";
+}
+
+export function setTheme(theme, persist = true) {
+  document.documentElement.setAttribute("data-theme", theme);
+  if (persist) {
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch {
+      /* storage unavailable */
+    }
+  }
+  document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
+    btn.setAttribute("aria-pressed", String(theme === "dark"));
+    const sun = btn.querySelector("[data-icon-sun]");
+    const moon = btn.querySelector("[data-icon-moon]");
+    if (sun && moon) {
+      sun.hidden = theme === "light";
+      moon.hidden = theme === "dark";
+    }
+  });
+}
+
+export function initTheme() {
+  let stored = null;
+  try {
+    stored = localStorage.getItem(THEME_KEY);
+  } catch {
+    /* ignore */
+  }
+  setTheme(stored || (media.matches ? "dark" : "light"), false);
+
+  media.addEventListener("change", (e) => {
+    let saved = null;
+    try {
+      saved = localStorage.getItem(THEME_KEY);
+    } catch {
+      /* ignore */
+    }
+    if (!saved) setTheme(e.matches ? "dark" : "light", false);
+  });
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-theme-toggle]");
+    if (!btn) return;
+    setTheme(getTheme() === "dark" ? "light" : "dark");
+  });
+}
+
+/**
+ * Animations Module: Scroll reveals and counter animations.
+ */
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+export function initReveals(root = document) {
+  const targets = root.querySelectorAll("[data-reveal]:not(.is-revealed)");
+  if (!targets.length) return;
+
+  if (reduced.matches || !("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("is-revealed"));
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        io.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+  );
+
+  targets.forEach((el, i) => {
+    if (!el.style.getPropertyValue("--reveal-delay")) {
+      const index = Number(el.dataset.revealIndex ?? i % 4);
+      el.style.setProperty("--reveal-delay", `${index * 90}ms`);
+    }
+    io.observe(el);
+  });
+}
+
+export function initCounters(root = document) {
+  const counters = root.querySelectorAll("[data-count]");
+  if (!counters.length) return;
+
+  const render = (el, value) => {
+    el.textContent = formatNumber(value) + (el.dataset.suffix || "");
+  };
+
+  if (reduced.matches || !("IntersectionObserver" in window)) {
+    counters.forEach((el) => render(el, Number(el.dataset.count)));
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        io.unobserve(el);
+        const target = Number(el.dataset.count) || 0;
+        const duration = 1400;
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          render(el, Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    },
+    { threshold: 0.4 },
+  );
+
+  counters.forEach((el) => {
+    render(el, 0);
+    io.observe(el);
+  });
+}
+
+/* ==========================================================================
+   3. LAYOUT & NAVIGATION
+   ========================================================================== */
 
 const PAGES = [
   { key: "nav.home", href: "index.html", id: "home" },
@@ -2530,100 +2275,8 @@ export function renderChrome() {
 }
 
 /**
- * main.js — single entry point. Boots shared systems, then the page module
- * matching <body data-page="...">.
+ * Interactive Navigation Logic (Dropdowns, Mobile Drawer, Sticky Header).
  */
-
-import { renderChrome } from "./layout.js";
-import { initTheme } from "./theme.js";
-import {
-  initLanguage,
-  applyTranslations,
-  onLanguageChange,
-} from "./language.js";
-import { initNavigation } from "./navigation.js";
-import { initReveals, initCounters } from "./animations.js";
-import {
-  renderCategories,
-  renderFeatured,
-  initProductsPage,
-  initProductDetails,
-} from "./products.js";
-import { renderNews, initNewsPage, initNewsDetails } from "./news.js";
-import { initContactForm } from "./contact.js";
-import { initGallery } from "./gallery.js";
-import { initCatalogue } from "./catalogue.js";
-import { company } from "../data/company.js";
-
-function fillCompanyPlaceholders() {
-  document.querySelectorAll("[data-company]").forEach((el) => {
-    const key = el.getAttribute("data-company");
-    const value = key
-      .split(".")
-      .reduce((a, k) => (a ? a[k] : undefined), company);
-    if (typeof value === "string") el.textContent = value;
-  });
-  document.querySelectorAll("[data-company-href]").forEach((el) => {
-    const [scheme, key] = el.getAttribute("data-company-href").split(":");
-    const value = company[key];
-    if (!value) return;
-    if (scheme === "tel") el.href = `tel:${value.replace(/\s/g, "")}`;
-    if (scheme === "mailto") el.href = `mailto:${value}`;
-    if (scheme === "wa") el.href = `https://wa.me/${value.replace(/\D/g, "")}`;
-  });
-}
-
-function boot() {
-  renderChrome();
-  initTheme();
-  initNavigation();
-  initLanguage();
-  fillCompanyPlaceholders();
-
-  const page = document.body.getAttribute("data-page");
-
-  if (page === "home") {
-    renderCategories("[data-category-grid]");
-    renderFeatured("[data-featured-grid]");
-    renderNews("[data-news-teaser]", 3);
-    onLanguageChange(() => {
-      renderCategories("[data-category-grid]");
-      renderFeatured("[data-featured-grid]");
-      renderNews("[data-news-teaser]", 3);
-      applyTranslations();
-    });
-  }
-
-  if (page === "products") initProductsPage();
-  if (page === "product-details") initProductDetails();
-  if (page === "news") initNewsPage();
-  if (page === "news-details") initNewsDetails();
-  if (page === "contact") initContactForm();
-  if (page === "gallery") initGallery();
-  if (page === "catalogue") {
-    const rerender = initCatalogue();
-    onLanguageChange(() => {
-      rerender && rerender();
-      applyTranslations();
-    });
-  }
-
-  applyTranslations();
-  initReveals();
-  initCounters();
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", boot);
-} else {
-  boot();
-}
-
-/**
- * navigation.js — sticky header state, desktop dropdowns, language dropdown,
- * accessible mobile drawer and the back-to-top control.
- */
-
 export function initNavigation() {
   const header = document.getElementById("site-header");
   const drawer = document.getElementById("site-drawer");
@@ -2663,7 +2316,6 @@ export function initNavigation() {
       if (!item.contains(e.relatedTarget)) open(false);
     });
     trigger?.addEventListener("click", (e) => {
-      // On touch devices the first tap opens the menu instead of navigating.
       if (
         window.matchMedia("(hover: none)").matches &&
         !item.classList.contains("is-open")
@@ -2743,7 +2395,6 @@ export function initNavigation() {
         .forEach((el) => el.classList.remove("is-open"));
       if (drawer?.classList.contains("is-open")) setDrawer(false);
     }
-    // Focus trap inside the open drawer
     if (e.key === "Tab" && drawer?.classList.contains("is-open")) {
       const focusables = drawer.querySelectorAll(
         "a[href], button:not([disabled])",
@@ -2767,21 +2418,13 @@ export function initNavigation() {
   });
 }
 
+/* ==========================================================================
+   4. FEATURE MODULES (PRODUCTS, NEWS, GALLERY, CATALOGUE, CONTACT)
+   ========================================================================== */
+
 /**
- * news.js — news listing, home teaser and article detail rendering.
+ * Helper for HTML escaping string inputs.
  */
-
-import { news } from "../data/news.js";
-import {
-  t,
-  pick,
-  formatDate,
-  onLanguageChange,
-  updateTitle,
-} from "./language.js";
-import { arrowIcon } from "./layout.js";
-import { initReveals } from "./animations.js";
-
 const esc = (s) =>
   String(s).replace(
     /[&<>"']/g,
@@ -2791,127 +2434,7 @@ const esc = (s) =>
       ],
   );
 
-export function newsCard(item) {
-  return `
-  <article class="n-card" data-reveal>
-    <a class="n-card__media" href="news-details.html?article=${item.slug}" tabindex="-1" aria-hidden="true">
-      <img src="${item.image}" alt="" loading="lazy" width="1200" height="800">
-    </a>
-    <div class="n-card__meta">
-      <span class="cat">${esc(t(`news.categories.${item.category}`))}</span>
-      <time datetime="${item.date}">${esc(formatDate(item.date))}</time>
-    </div>
-    <h3><a href="news-details.html?article=${item.slug}">${esc(pick(item.title))}</a></h3>
-    <p>${esc(pick(item.excerpt))}</p>
-    <a class="link-arrow" href="news-details.html?article=${item.slug}">${esc(t("cta.readMore"))}${arrowIcon}</a>
-  </article>`;
-}
-
-export function renderNews(target, limit) {
-  const el = document.querySelector(target);
-  if (!el) return;
-  const items = [...news].sort((a, b) => b.date.localeCompare(a.date));
-  el.innerHTML = (limit ? items.slice(0, limit) : items).map(newsCard).join("");
-  initReveals(el);
-}
-
-export function initNewsPage() {
-  const el = document.querySelector("[data-news-grid]");
-  if (!el) return;
-  const render = () => renderNews("[data-news-grid]");
-  render();
-  onLanguageChange(render);
-}
-
-export function initNewsDetails() {
-  const root = document.querySelector("[data-news-detail]");
-  if (!root) return;
-
-  const slug = new URLSearchParams(location.search).get("article");
-  const item = news.find((n) => n.slug === slug);
-
-  const render = () => {
-    if (!item) {
-      root.innerHTML = `
-        <div class="container section">
-          <div class="state">
-            <h1>${esc(t("errors.articleNotFound"))}</h1>
-            <p>${esc(t("errors.articleNotFoundText"))}</p>
-            <a class="btn" href="news.html">${esc(t("news.back"))}</a>
-          </div>
-        </div>`;
-      updateTitle(t("errors.articleNotFound"));
-      return;
-    }
-
-    updateTitle(pick(item.title));
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", pick(item.excerpt).slice(0, 155));
-
-    const related = news.filter((n) => n.slug !== item.slug).slice(0, 3);
-
-    root.innerHTML = `
-      <section class="page-hero">
-        <div class="page-hero__media"><img src="${item.image}" alt="" width="1200" height="800"></div>
-        <div class="container page-hero__inner">
-          <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="index.html">${esc(t("breadcrumb.home"))}</a><span class="sep">›</span>
-            <a href="news.html">${esc(t("breadcrumb.news"))}</a><span class="sep">›</span>
-            <span>${esc(pick(item.title))}</span>
-          </nav>
-          <p class="eyebrow">${esc(t(`news.categories.${item.category}`))}</p>
-          <h1>${esc(pick(item.title))}</h1>
-          <p><time datetime="${item.date}">${esc(formatDate(item.date))}</time></p>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="article">
-            <p class="lead">${esc(pick(item.excerpt))}</p>
-            <figure class="article__figure"><img src="${item.image}" alt="${esc(pick(item.title))}" loading="lazy" width="1200" height="800"></figure>
-            ${pick(item.body)
-              .map((p) => `<p>${esc(p)}</p>`)
-              .join("")}
-            <p class="mt-lg"><a class="btn btn--ghost" href="news.html">${esc(t("news.back"))}</a></p>
-          </div>
-        </div>
-      </section>
-
-      ${
-        related.length
-          ? `<section class="section section--alt">
-              <div class="container">
-                <div class="section-head"><h2>${esc(t("news.related"))}</h2></div>
-                <div class="grid grid--3">${related.map(newsCard).join("")}</div>
-              </div>
-            </section>`
-          : ""
-      }`;
-    initReveals(root);
-  };
-
-  render();
-  onLanguageChange(render);
-}
-/**
- * products.js — rendering, search, filtering and product detail pages.
- */
-
-import { products } from "../data/products.js";
-import { categories } from "../data/categories.js";
-import { t, pick, getLang, onLanguageChange, updateTitle } from "./language.js";
-import { arrowIcon } from "./layout.js";
-import { initReveals } from "./animations.js";
-
-const esc = (s) =>
-  String(s).replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
-        c
-      ],
-  );
+/* ------------------------------- Products Module ------------------------------- */
 
 export function productCard(p) {
   return `
@@ -2955,8 +2478,6 @@ export function renderCategories(target) {
   el.innerHTML = categories.map(categoryCard).join("");
   initReveals(el);
 }
-
-/* ------------------------------- Products page ------------------------------- */
 
 export function initProductsPage() {
   const grid = document.querySelector("[data-product-grid]");
@@ -3065,8 +2586,6 @@ export function initProductsPage() {
     render();
   });
 }
-
-/* ---------------------------- Product details page ---------------------------- */
 
 export function initProductDetails() {
   const root = document.querySelector("[data-product-detail]");
@@ -3192,61 +2711,469 @@ export function initProductDetails() {
   onLanguageChange(render);
 }
 
-/**
- * theme.js — light/dark theme with localStorage persistence and
- * system-preference detection. The initial value is applied by an inline
- * script in each page <head> to avoid a flash of the wrong theme.
- */
+/* --------------------------------- News Module --------------------------------- */
 
-const KEY = "site-theme";
-const media = window.matchMedia("(prefers-color-scheme: dark)");
-
-export function getTheme() {
-  return document.documentElement.getAttribute("data-theme") || "light";
+export function newsCard(item) {
+  return `
+  <article class="n-card" data-reveal>
+    <a class="n-card__media" href="news-details.html?article=${item.slug}" tabindex="-1" aria-hidden="true">
+      <img src="${item.image}" alt="" loading="lazy" width="1200" height="800">
+    </a>
+    <div class="n-card__meta">
+      <span class="cat">${esc(t(`news.categories.${item.category}`))}</span>
+      <time datetime="${item.date}">${esc(formatDate(item.date))}</time>
+    </div>
+    <h3><a href="news-details.html?article=${item.slug}">${esc(pick(item.title))}</a></h3>
+    <p>${esc(pick(item.excerpt))}</p>
+    <a class="link-arrow" href="news-details.html?article=${item.slug}">${esc(t("cta.readMore"))}${arrowIcon}</a>
+  </article>`;
 }
 
-export function setTheme(theme, persist = true) {
-  document.documentElement.setAttribute("data-theme", theme);
-  if (persist) {
-    try {
-      localStorage.setItem(KEY, theme);
-    } catch {
-      /* storage unavailable */
+export function renderNews(target, limit) {
+  const el = document.querySelector(target);
+  if (!el) return;
+  const items = [...news].sort((a, b) => b.date.localeCompare(a.date));
+  el.innerHTML = (limit ? items.slice(0, limit) : items).map(newsCard).join("");
+  initReveals(el);
+}
+
+export function initNewsPage() {
+  const el = document.querySelector("[data-news-grid]");
+  if (!el) return;
+  const render = () => renderNews("[data-news-grid]");
+  render();
+  onLanguageChange(render);
+}
+
+export function initNewsDetails() {
+  const root = document.querySelector("[data-news-detail]");
+  if (!root) return;
+
+  const slug = new URLSearchParams(location.search).get("article");
+  const item = news.find((n) => n.slug === slug);
+
+  const render = () => {
+    if (!item) {
+      root.innerHTML = `
+        <div class="container section">
+          <div class="state">
+            <h1>${esc(t("errors.articleNotFound"))}</h1>
+            <p>${esc(t("errors.articleNotFoundText"))}</p>
+            <a class="btn" href="news.html">${esc(t("news.back"))}</a>
+          </div>
+        </div>`;
+      updateTitle(t("errors.articleNotFound"));
+      return;
     }
+
+    updateTitle(pick(item.title));
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute("content", pick(item.excerpt).slice(0, 155));
+
+    const related = news.filter((n) => n.slug !== item.slug).slice(0, 3);
+
+    root.innerHTML = `
+      <section class="page-hero">
+        <div class="page-hero__media"><img src="${item.image}" alt="" width="1200" height="800"></div>
+        <div class="container page-hero__inner">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">${esc(t("breadcrumb.home"))}</a><span class="sep">›</span>
+            <a href="news.html">${esc(t("breadcrumb.news"))}</a><span class="sep">›</span>
+            <span>${esc(pick(item.title))}</span>
+          </nav>
+          <p class="eyebrow">${esc(t(`news.categories.${item.category}`))}</p>
+          <h1>${esc(pick(item.title))}</h1>
+          <p><time datetime="${item.date}">${esc(formatDate(item.date))}</time></p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="article">
+            <p class="lead">${esc(pick(item.excerpt))}</p>
+            <figure class="article__figure"><img src="${item.image}" alt="${esc(pick(item.title))}" loading="lazy" width="1200" height="800"></figure>
+            ${pick(item.body)
+              .map((p) => `<p>${esc(p)}</p>`)
+              .join("")}
+            <p class="mt-lg"><a class="btn btn--ghost" href="news.html">${esc(t("news.back"))}</a></p>
+          </div>
+        </div>
+      </section>
+
+      ${
+        related.length
+          ? `<section class="section section--alt">
+              <div class="container">
+                <div class="section-head"><h2>${esc(t("news.related"))}</h2></div>
+                <div class="grid grid--3">${related.map(newsCard).join("")}</div>
+              </div>
+            </section>`
+          : ""
+      }`;
+    initReveals(root);
+  };
+
+  render();
+  onLanguageChange(render);
+}
+
+/* ------------------------------- Gallery Module ------------------------------- */
+
+export const galleryItems = [
+  {
+    src: "assets/images/cat-herbs.jpg",
+    group: "herbs",
+    caption: { en: "Dried chamomile & hibiscus", ar: "بابونج وكركديه مجفف" },
+  },
+  {
+    src: "assets/images/cat-spices.jpg",
+    group: "spices",
+    caption: { en: "Milled spice range", ar: "مجموعة التوابل المطحونة" },
+  },
+  {
+    src: "assets/images/cat-seeds.jpg",
+    group: "seeds",
+    caption: { en: "Sortex-cleaned seeds", ar: "بذور منظفة بالسورتكس" },
+  },
+  {
+    src: "assets/images/cat-dehydrated.jpg",
+    group: "dehydrated",
+    caption: { en: "Dehydrated vegetables", ar: "خضروات مجففة" },
+  },
+  {
+    src: "assets/images/factory-production.jpg",
+    group: "facility",
+    caption: { en: "Drying & milling hall", ar: "صالة التجفيف والطحن" },
+  },
+  {
+    src: "assets/images/quality-control.jpg",
+    group: "facility",
+    caption: { en: "In-house laboratory", ar: "المعمل الداخلي" },
+  },
+  {
+    src: "assets/images/logistics.jpg",
+    group: "facility",
+    caption: { en: "Export warehouse", ar: "مخزن التصدير" },
+  },
+  {
+    src: "assets/images/factory-hero.jpg",
+    group: "facility",
+    caption: { en: "Processing plant, Fayoum", ar: "مصنع المعالجة بالفيوم" },
+  },
+  {
+    src: "assets/images/product-01.jpg",
+    group: "herbs",
+    caption: { en: "Whole flower grading", ar: "فرز الزهور الكاملة" },
+  },
+  {
+    src: "assets/images/product-02.jpg",
+    group: "spices",
+    caption: { en: "Blending station", ar: "محطة الخلط" },
+  },
+  {
+    src: "assets/images/product-03.jpg",
+    group: "seeds",
+    caption: { en: "Seed cleaning line", ar: "خط تنظيف البذور" },
+  },
+  {
+    src: "assets/images/news-01.jpg",
+    group: "facility",
+    caption: { en: "Harvest season", ar: "موسم الحصاد" },
+  },
+];
+
+const GROUPS = ["all", "herbs", "spices", "seeds", "dehydrated", "facility"];
+
+function label(group) {
+  if (group === "all") return t("gallery.all");
+  if (group === "facility") return t("about.capTitle");
+  return t(`categories.${group}.name`);
+}
+
+export function initGallery() {
+  const filters = document.querySelector("[data-gallery-filters]");
+  const grid = document.querySelector("[data-gallery-grid]");
+  if (!grid) return;
+
+  let active = "all";
+  let visible = [];
+
+  const lang = document.documentElement.lang || "en";
+  const cap = (item) => item.caption[lang] || item.caption.en;
+
+  const render = () => {
+    visible = galleryItems.filter(
+      (i) => active === "all" || i.group === active,
+    );
+    grid.innerHTML = visible
+      .map(
+        (item, i) => `
+        <button type="button" class="gallery-item" data-index="${i}" data-reveal>
+          <img src="${item.src}" alt="${cap(item)}" loading="lazy" width="1200" height="900">
+          <span class="gallery-item__cap">${cap(item)}</span>
+        </button>`,
+      )
+      .join("");
+  };
+
+  if (filters) {
+    filters.innerHTML = GROUPS.map(
+      (g) =>
+        `<button type="button" class="chip${g === "all" ? " is-active" : ""}" data-group="${g}">${label(g)}</button>`,
+    ).join("");
+    filters.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-group]");
+      if (!btn) return;
+      active = btn.getAttribute("data-group");
+      filters
+        .querySelectorAll(".chip")
+        .forEach((c) => c.classList.toggle("is-active", c === btn));
+      render();
+    });
   }
-  document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
-    btn.setAttribute("aria-pressed", String(theme === "dark"));
-    const sun = btn.querySelector("[data-icon-sun]");
-    const moon = btn.querySelector("[data-icon-moon]");
-    if (sun && moon) {
-      sun.hidden = theme === "light";
-      moon.hidden = theme === "dark";
+
+  render();
+
+  /* ---- lightbox ---- */
+  const box = document.createElement("div");
+  box.className = "lightbox";
+  box.setAttribute("role", "dialog");
+  box.setAttribute("aria-modal", "true");
+  box.innerHTML = `
+    <button type="button" class="lightbox__close" data-close aria-label="Close">✕</button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" data-prev aria-label="Previous">‹</button>
+    <img alt="">
+    <button type="button" class="lightbox__nav lightbox__nav--next" data-next aria-label="Next">›</button>`;
+  document.body.appendChild(box);
+
+  const img = box.querySelector("img");
+  let index = 0;
+
+  const show = (i) => {
+    index = (i + visible.length) % visible.length;
+    img.src = visible[index].src;
+    img.alt = cap(visible[index]);
+  };
+  const open = (i) => {
+    show(i);
+    box.classList.add("is-open");
+    document.body.classList.add("is-locked");
+    box.querySelector("[data-close]").focus();
+  };
+  const close = () => {
+    box.classList.remove("is-open");
+    document.body.classList.remove("is-locked");
+  };
+
+  grid.addEventListener("click", (e) => {
+    const cell = e.target.closest("[data-index]");
+    if (cell) open(Number(cell.getAttribute("data-index")));
+  });
+  box.addEventListener("click", (e) => {
+    if (e.target.closest("[data-close]") || e.target === box) close();
+    if (e.target.closest("[data-next]")) show(index + 1);
+    if (e.target.closest("[data-prev]")) show(index - 1);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (!box.classList.contains("is-open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowRight") show(index + 1);
+    if (e.key === "ArrowLeft") show(index - 1);
+  });
+}
+
+/* ------------------------------ Catalogue Module ------------------------------ */
+
+export function initCatalogue() {
+  const body = document.querySelector("[data-catalogue-rows]");
+  if (!body) return;
+
+  const render = () => {
+    body.innerHTML = categories
+      .map((cat) => {
+        const rows = products
+          .filter((p) => p.category === cat.id)
+          .map(
+            (p) => `
+            <tr>
+              <td><a href="product-details.html?product=${p.slug}">${pick(p.name)}</a></td>
+              <td>${p.code}</td>
+              <td>${pick(p.specifications[0].value)}</td>
+              <td>${pick(p.packaging[0])}</td>
+            </tr>`,
+          )
+          .join("");
+        return `
+          <tr class="catalogue-group"><th colspan="4" data-i18n="categories.${cat.id}.name">${t(`categories.${cat.id}.name`)}</th></tr>
+          ${rows}`;
+      })
+      .join("");
+  };
+
+  render();
+  return render;
+}
+
+/* -------------------------------- Contact Module -------------------------------- */
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+const PHONE_RE = /^[+()\-\s\d]{6,24}$/;
+
+function setError(field, message) {
+  const wrap = field.closest(".field");
+  const slot = wrap?.querySelector(".error");
+  wrap?.setAttribute("data-invalid", message ? "true" : "false");
+  field.setAttribute("aria-invalid", message ? "true" : "false");
+  if (slot) slot.textContent = message || "";
+}
+
+function validateField(field) {
+  const value = field.value.trim();
+  const name = field.name;
+  let message = "";
+
+  if (name === "name" && value.length < 2) message = t("form.errName");
+  if (name === "email" && !EMAIL_RE.test(value)) message = t("form.errEmail");
+  if (name === "phone" && value && !PHONE_RE.test(value))
+    message = t("form.errPhone");
+  if (name === "message" && value.length < 20) message = t("form.errMessage");
+
+  setError(field, message);
+  return !message;
+}
+
+export function initContactForm() {
+  const form = document.querySelector("[data-contact-form]");
+  if (!form) return;
+
+  const status = form.querySelector("[data-form-status]");
+  const submit = form.querySelector("[data-submit]");
+  const submitLabel = submit?.querySelector("span");
+
+  const product = new URLSearchParams(location.search).get("product");
+  const subject = form.querySelector('[name="subject"]');
+  if (product && subject && !subject.value)
+    subject.value = `Inquiry: ${product}`;
+
+  const showStatus = (type, message) => {
+    if (!status) return;
+    status.hidden = false;
+    status.dataset.type = type;
+    status.textContent = message;
+  };
+
+  form.querySelectorAll("input, textarea").forEach((field) => {
+    field.addEventListener("blur", () => {
+      if (field.value.trim()) validateField(field);
+    });
+    field.addEventListener("input", () => {
+      if (field.closest(".field")?.getAttribute("data-invalid") === "true")
+        validateField(field);
+    });
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status && (status.hidden = true);
+
+    const required = [...form.querySelectorAll("[required], [name='phone']")];
+    const valid = required.map(validateField).every(Boolean);
+    if (!valid) {
+      form.querySelector('[aria-invalid="true"]')?.focus();
+      showStatus("error", t("form.errGeneric"));
+      return;
+    }
+
+    if (!company.formEndpoint) {
+      showStatus("info", t("form.notConfigured"));
+      return;
+    }
+
+    submit.disabled = true;
+    if (submitLabel) submitLabel.textContent = t("form.sending");
+
+    try {
+      const res = await fetch(company.formEndpoint, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      form.reset();
+      showStatus("success", t("form.success"));
+    } catch {
+      showStatus("error", t("form.errGeneric"));
+    } finally {
+      submit.disabled = false;
+      if (submitLabel) submitLabel.textContent = t("form.submit");
     }
   });
 }
 
-export function initTheme() {
-  let stored = null;
-  try {
-    stored = localStorage.getItem(KEY);
-  } catch {
-    /* ignore */
+/* ==========================================================================
+   5. APPLICATION INITIALIZATION & ENTRY POINT
+   ========================================================================== */
+
+function fillCompanyPlaceholders() {
+  document.querySelectorAll("[data-company]").forEach((el) => {
+    const key = el.getAttribute("data-company");
+    const value = key
+      .split(".")
+      .reduce((a, k) => (a ? a[k] : undefined), company);
+    if (typeof value === "string") el.textContent = value;
+  });
+  document.querySelectorAll("[data-company-href]").forEach((el) => {
+    const [scheme, key] = el.getAttribute("data-company-href").split(":");
+    const value = company[key];
+    if (!value) return;
+    if (scheme === "tel") el.href = `tel:${value.replace(/\s/g, "")}`;
+    if (scheme === "mailto") el.href = `mailto:${value}`;
+    if (scheme === "wa") el.href = `https://wa.me/${value.replace(/\D/g, "")}`;
+  });
+}
+
+function boot() {
+  renderChrome();
+  initTheme();
+  initNavigation();
+  initLanguage();
+  fillCompanyPlaceholders();
+
+  const page = document.body.getAttribute("data-page");
+
+  if (page === "home") {
+    renderCategories("[data-category-grid]");
+    renderFeatured("[data-featured-grid]");
+    renderNews("[data-news-teaser]", 3);
+    onLanguageChange(() => {
+      renderCategories("[data-category-grid]");
+      renderFeatured("[data-featured-grid]");
+      renderNews("[data-news-teaser]", 3);
+      applyTranslations();
+    });
   }
-  setTheme(stored || (media.matches ? "dark" : "light"), false);
 
-  media.addEventListener("change", (e) => {
-    let saved = null;
-    try {
-      saved = localStorage.getItem(KEY);
-    } catch {
-      /* ignore */
-    }
-    if (!saved) setTheme(e.matches ? "dark" : "light", false);
-  });
+  if (page === "products") initProductsPage();
+  if (page === "product-details") initProductDetails();
+  if (page === "news") initNewsPage();
+  if (page === "news-details") initNewsDetails();
+  if (page === "contact") initContactForm();
+  if (page === "gallery") initGallery();
+  if (page === "catalogue") {
+    const rerender = initCatalogue();
+    onLanguageChange(() => {
+      rerender && rerender();
+      applyTranslations();
+    });
+  }
 
-  document.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-theme-toggle]");
-    if (!btn) return;
-    setTheme(getTheme() === "dark" ? "light" : "dark");
-  });
+  applyTranslations();
+  initReveals();
+  initCounters();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", boot);
+} else {
+  boot();
 }
