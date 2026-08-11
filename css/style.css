@@ -1,5 +1,5 @@
 /* =========================================================================
-   EL-HAMD EXPORTS â€” DESIGN SYSTEM
+   EL-HAMD EXPORTS — DESIGN SYSTEM
    Premium Medicinal Plants & Agricultural Export Company
    ========================================================================= */
 
@@ -51,13 +51,13 @@
    TOKENS
    ========================================================================= */
 :root {
-  /* Brand Palette â€” deep forest greens, warm gold */
-  --forest: #1a2e1d; /* deepest green â€” dark sections, hero overlay */
+  /* Brand Palette — deep forest greens, warm gold */
+  --forest: #1a2e1d; /* deepest green — dark sections, hero overlay */
   --pine: #2a4f31; /* dark mid-green */
   --sage: #3d7a4a; /* primary action green */
   --sage-light: #4e9c60; /* hover state */
   --sage-soft: rgba(61, 122, 74, 0.1);
-  --gold: #b8922a; /* accent â€” Arabic warmth, wheat/harvest */
+  --gold: #b8922a; /* accent — Arabic warmth, wheat/harvest */
   --gold-light: #d4aa40;
   --gold-pale: #f5edd5; /* very warm background tint */
 
@@ -573,12 +573,27 @@ html[data-theme="dark"] .header.is-scrolled {
   color: rgba(255, 255, 255, 0.75);
   transition:
     background var(--t-fast) var(--ease),
-    color var(--t-fast) var(--ease);
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
   flex-shrink: 0;
 }
 .icon-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
+}
+
+/* Single Sun Icon Styling & Transition */
+[data-theme-toggle] [data-icon-sun] {
+  transition: transform var(--t-base) var(--ease);
+}
+
+[data-theme-toggle]:hover [data-icon-sun] {
+  transform: rotate(45deg);
+}
+
+html[data-theme="dark"] [data-theme-toggle] [data-icon-sun] {
+  color: var(--gold-light);
+  transform: rotate(180deg);
 }
 
 /* Language Picker */

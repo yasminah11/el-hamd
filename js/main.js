@@ -588,12 +588,6 @@ export function setTheme(theme, persist = true) {
   }
   document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
     btn.setAttribute("aria-pressed", String(theme === "dark"));
-    const sun = btn.querySelector("[data-icon-sun]");
-    const moon = btn.querySelector("[data-icon-moon]");
-    if (sun && moon) {
-      sun.hidden = theme === "light";
-      moon.hidden = theme === "dark";
-    }
   });
 }
 
@@ -693,7 +687,6 @@ export function initCounters(root = document) {
 
 const ICONS = {
   sun: '<svg data-icon-sun width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7" stroke-linecap="round"/></svg>',
-  moon: '<svg data-icon-moon width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2Z" stroke-linejoin="round"/></svg>',
   globe:
     '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg>',
   burger:
@@ -788,7 +781,7 @@ function headerMarkup(active) {
         </div>
       </div>
       <button type="button" class="icon-btn" data-theme-toggle aria-pressed="false" data-i18n-attr="aria-label:nav.theme">
-        ${ICONS.sun}${ICONS.moon}
+        ${ICONS.sun}
       </button>
       <button type="button" class="icon-btn burger" data-drawer-open aria-expanded="false" data-i18n-attr="aria-label:nav.open">
         ${ICONS.burger}
@@ -828,7 +821,7 @@ function drawerMarkup(active) {
         <button type="button" data-lang-option="en" lang="en">EN</button>
         <button type="button" data-lang-option="ar" lang="ar">AR</button>
       </div>
-      <button type="button" class="icon-btn" data-theme-toggle aria-pressed="false">${ICONS.sun}${ICONS.moon}</button>
+      <button type="button" class="icon-btn" data-theme-toggle aria-pressed="false">${ICONS.sun}</button>
     </div>`;
 }
 

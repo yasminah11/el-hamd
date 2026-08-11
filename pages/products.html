@@ -3,29 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Products — [COMPANY NAME]</title>
+    <title>Products — El-Hamd Exports</title>
     <meta
       name="description"
-      content="Browse the full product catalogue of [COMPANY NAME]. Filter by category or search by product name and code."
+      content="Browse El-Hamd's full export catalogue: medicinal herbs, spices & seasonings, seeds, and dehydrated vegetables. Filter by category, search by name or code."
     />
-    <meta property="og:title" content="Products — [COMPANY NAME]" />
-    <meta
-      property="og:description"
-      content="Full manufacturing catalogue with categories, specifications and export formats."
-    />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="products.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <script>
       try {
@@ -44,6 +28,87 @@
         }
       } catch (e) {}
     </script>
+    <style>
+      /* Category page tabs */
+      .cat-tabs {
+        display: flex;
+        gap: 0;
+        border-bottom: 2px solid var(--border);
+        margin-bottom: 3rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .cat-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .cat-tab-btn {
+        padding: 1rem 1.5rem;
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        color: var(--muted);
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition:
+          color var(--t-fast),
+          border-color var(--t-fast);
+        letter-spacing: 0.03em;
+      }
+      .cat-tab-btn:hover {
+        color: var(--sage);
+      }
+      .cat-tab-btn.is-active {
+        color: var(--sage);
+        border-color: var(--sage);
+      }
+
+      /* Category page sections */
+      .cat-section {
+        display: none;
+      }
+      .cat-section.is-active {
+        display: block;
+      }
+
+      /* Category header banner */
+      .cat-banner {
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 3rem;
+        height: 240px;
+      }
+      .cat-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 40%;
+      }
+      .cat-banner__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          rgba(10, 16, 11, 0.85) 0%,
+          rgba(10, 16, 11, 0.3) 60%,
+          transparent 100%
+        );
+        display: flex;
+        align-items: center;
+        padding: 2.5rem;
+      }
+      .cat-banner__text h2 {
+        font-size: var(--fs-h2);
+        color: #fff;
+        margin-bottom: 0.5rem;
+      }
+      .cat-banner__text p {
+        font-size: var(--fs-sm);
+        color: rgba(232, 228, 217, 0.75);
+        max-width: 400px;
+      }
+    </style>
   </head>
   <body data-page="products" data-title-key="products.title">
     <a class="skip-link" href="#main" data-i18n="nav.skip"
@@ -53,35 +118,53 @@
     <div class="drawer" id="site-drawer" aria-hidden="true"></div>
 
     <main id="main">
+      <!-- PAGE HERO -->
       <section class="page-hero">
         <div class="page-hero__media">
           <img
-            src="assets/images/product-02.jpg"
-            alt=""
-            width="1200"
-            height="900"
+            src="../assets/images/cat-herbs.jpg"
+            alt="El-Hamd product range"
+            width="1920"
+            height="600"
+            onerror="
+              this.onerror = null;
+              this.parentElement.style.background =
+                'linear-gradient(135deg,#1a2e1d,#111a13)';
+            "
           />
         </div>
+        <div class="page-hero__overlay"></div>
         <div class="container page-hero__inner">
           <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="index.html" data-i18n="breadcrumb.home"></a
-            ><span class="sep">›</span><span data-i18n="nav.products"></span>
+            <a href="index.html" data-i18n="breadcrumb.home">Home</a>
+            <span class="sep">›</span>
+            <span data-i18n="nav.products">Products</span>
           </nav>
-          <p class="eyebrow" data-i18n="products.eyebrow"></p>
-          <h1 data-i18n="products.title"></h1>
-          <p data-i18n="products.lead"></p>
+          <p
+            class="eyebrow"
+            style="color: var(--gold-light)"
+            data-i18n="products.eyebrow"
+          >
+            Catalogue
+          </p>
+          <h1 data-i18n="products.title">Our Products</h1>
+          <p data-i18n="products.lead">
+            Browse the full range by category. All products available with full
+            specifications and samples.
+          </p>
         </div>
       </section>
 
       <section class="section">
         <div class="container">
+          <!-- SEARCH + SORT TOOLBAR -->
           <div class="toolbar">
             <div class="toolbar__row">
               <div class="search">
                 <span class="search__icon" aria-hidden="true">
                   <svg
-                    width="18"
-                    height="18"
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -95,11 +178,13 @@
                   class="sr-only"
                   for="product-search"
                   data-i18n="products.search"
-                ></label>
+                  >Search products</label
+                >
                 <input
                   id="product-search"
                   type="search"
                   data-search
+                  placeholder="Search by name or code…"
                   data-i18n-attr="placeholder:products.searchPlaceholder"
                 />
               </div>
@@ -107,14 +192,14 @@
                 class="sr-only"
                 for="product-sort"
                 data-i18n="products.sort"
-              ></label>
+                >Sort</label
+              >
               <select id="product-sort" class="select" data-sort>
-                <option
-                  value="default"
-                  data-i18n="products.sortDefault"
-                ></option>
-                <option value="az" data-i18n="products.sortAZ"></option>
-                <option value="za" data-i18n="products.sortZA"></option>
+                <option value="default" data-i18n="products.sortDefault">
+                  Default
+                </option>
+                <option value="az" data-i18n="products.sortAZ">Name A–Z</option>
+                <option value="za" data-i18n="products.sortZA">Name Z–A</option>
               </select>
             </div>
             <div class="toolbar__row">
@@ -131,26 +216,640 @@
               ></p>
             </div>
           </div>
-          <div class="grid grid--3" data-product-grid></div>
+
+          <!-- CATEGORY TABS for non-JS fallback + enhanced UX -->
+          <div class="cat-tabs" role="tablist" aria-label="Product Categories">
+            <button
+              class="cat-tab-btn is-active"
+              role="tab"
+              aria-selected="true"
+              data-cat-tab="all"
+            >
+              All Products
+            </button>
+            <button
+              class="cat-tab-btn"
+              role="tab"
+              aria-selected="false"
+              data-cat-tab="herbs"
+              data-i18n="categories.herbs.name"
+            >
+              Medicinal Herbs
+            </button>
+            <button
+              class="cat-tab-btn"
+              role="tab"
+              aria-selected="false"
+              data-cat-tab="spices"
+              data-i18n="categories.spices.name"
+            >
+              Spices & Seasonings
+            </button>
+            <button
+              class="cat-tab-btn"
+              role="tab"
+              aria-selected="false"
+              data-cat-tab="seeds"
+              data-i18n="categories.seeds.name"
+            >
+              Seeds
+            </button>
+            <button
+              class="cat-tab-btn"
+              role="tab"
+              aria-selected="false"
+              data-cat-tab="dehydrated"
+              data-i18n="categories.dehydrated.name"
+            >
+              Dehydrated Vegetables
+            </button>
+          </div>
+
+          <!-- PRODUCT GRID — Data in HTML, JS handles filtering -->
+          <div class="product-grid" data-product-grid>
+            <!-- ─── HERBS ─── -->
+            <div
+              class="product-card"
+              data-product-item
+              data-category="herbs"
+              data-name="Egyptian Chamomile Flowers"
+              data-code="HRB-101"
+              data-featured="true"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-herbs.jpg"
+                  alt="Egyptian Chamomile Flowers"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#2a4f31';
+                  "
+                />
+                <span class="product-card__badge">Featured</span>
+              </div>
+              <div class="product-card__body">
+                <p class="product-card__cat" data-i18n="categories.herbs.name">
+                  Medicinal Herbs
+                </p>
+                <h3 class="product-card__name">Egyptian Chamomile Flowers</h3>
+                <p class="product-card__code">HRB-101</p>
+                <p class="product-card__desc">
+                  Sun-dried whole chamomile flowers (Matricaria chamomilla) from
+                  Fayoum basin. Graded for herbal tea, extraction and cosmetic
+                  use.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=chamomile-flowers"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="product-card"
+              data-product-item
+              data-category="herbs"
+              data-name="Peppermint Leaves Cut & Sifted"
+              data-code="HRB-102"
+              data-featured="true"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-herbs.jpg"
+                  alt="Peppermint Leaves"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#2a4f31';
+                  "
+                />
+              </div>
+              <div class="product-card__body">
+                <p class="product-card__cat" data-i18n="categories.herbs.name">
+                  Medicinal Herbs
+                </p>
+                <h3 class="product-card__name">
+                  Peppermint Leaves (Cut & Sifted)
+                </h3>
+                <p class="product-card__code">HRB-102</p>
+                <p class="product-card__desc">
+                  Air-dried Mentha piperita leaves, cut and sifted to tea-bag
+                  cut. Bright green colour with a clean, high-menthol aroma.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=peppermint-leaves"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="product-card"
+              data-product-item
+              data-category="herbs"
+              data-name="Hibiscus Flowers Karkade"
+              data-code="HRB-103"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-herbs.jpg"
+                  alt="Hibiscus Flowers"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#4a1e2a';
+                  "
+                />
+              </div>
+              <div class="product-card__body">
+                <p class="product-card__cat" data-i18n="categories.herbs.name">
+                  Medicinal Herbs
+                </p>
+                <h3 class="product-card__name">Hibiscus Flowers (Karkade)</h3>
+                <p class="product-card__code">HRB-103</p>
+                <p class="product-card__desc">
+                  Deep-red Hibiscus sabdariffa calyces from Upper Egypt. High
+                  anthocyanin content, strong colour yield for infusions.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=hibiscus-flowers"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <!-- ─── SPICES ─── -->
+            <div
+              class="product-card"
+              data-product-item
+              data-category="spices"
+              data-name="Ground Cumin"
+              data-code="SPC-201"
+              data-featured="true"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-spices.jpg"
+                  alt="Ground Cumin"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#5c3a1e';
+                  "
+                />
+                <span class="product-card__badge">Featured</span>
+              </div>
+              <div class="product-card__body">
+                <p class="product-card__cat" data-i18n="categories.spices.name">
+                  Spices & Seasonings
+                </p>
+                <h3 class="product-card__name">Ground Cumin</h3>
+                <p class="product-card__code">SPC-201</p>
+                <p class="product-card__desc">
+                  Cold-milled cumin powder with 2.5% minimum volatile oil.
+                  Temperature-controlled milling protects the aroma.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=ground-cumin"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="product-card"
+              data-product-item
+              data-category="spices"
+              data-name="Coriander Powder"
+              data-code="SPC-202"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-spices.jpg"
+                  alt="Coriander Powder"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#5c3a1e';
+                  "
+                />
+              </div>
+              <div class="product-card__body">
+                <p class="product-card__cat" data-i18n="categories.spices.name">
+                  Spices & Seasonings
+                </p>
+                <h3 class="product-card__name">Coriander Powder</h3>
+                <p class="product-card__code">SPC-202</p>
+                <p class="product-card__desc">
+                  Finely milled coriander seed with a warm citrus profile.
+                  Screened and metal-detected before packing.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=coriander-powder"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="product-card"
+              data-product-item
+              data-category="spices"
+              data-name="Shawarma Seasoning Blend"
+              data-code="SPC-203"
+              data-featured="true"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-spices.jpg"
+                  alt="Shawarma Seasoning Blend"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#5c3a1e';
+                  "
+                />
+                <span class="product-card__badge">Featured</span>
+              </div>
+              <div class="product-card__body">
+                <p class="product-card__cat" data-i18n="categories.spices.name">
+                  Spices & Seasonings
+                </p>
+                <h3 class="product-card__name">Shawarma Seasoning Blend</h3>
+                <p class="product-card__code">SPC-203</p>
+                <p class="product-card__desc">
+                  House blend of paprika, cumin, coriander, cinnamon and black
+                  pepper. Custom recipes available to buyer specification.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=shawarma-seasoning"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <!-- ─── SEEDS ─── -->
+            <div
+              class="product-card"
+              data-product-item
+              data-category="seeds"
+              data-name="Fennel Seeds"
+              data-code="SED-301"
+              data-featured="true"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-seeds.jpg"
+                  alt="Fennel Seeds"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#3d4a1e';
+                  "
+                />
+                <span class="product-card__badge">Featured</span>
+              </div>
+              <div class="product-card__body">
+                <p class="product-card__cat" data-i18n="categories.seeds.name">
+                  Seeds
+                </p>
+                <h3 class="product-card__name">Fennel Seeds</h3>
+                <p class="product-card__code">SED-301</p>
+                <p class="product-card__desc">
+                  Bright green, machine-cleaned fennel seed (Foeniculum vulgare)
+                  with a sweet anise aroma. Purity 99.5%.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=fennel-seeds"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="product-card"
+              data-product-item
+              data-category="seeds"
+              data-name="Black Cumin Seeds Nigella Sativa"
+              data-code="SED-302"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-seeds.jpg"
+                  alt="Black Cumin Seeds"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#1e1e2a';
+                  "
+                />
+              </div>
+              <div class="product-card__body">
+                <p class="product-card__cat" data-i18n="categories.seeds.name">
+                  Seeds
+                </p>
+                <h3 class="product-card__name">
+                  Black Cumin Seeds (Nigella Sativa)
+                </h3>
+                <p class="product-card__code">SED-302</p>
+                <p class="product-card__desc">
+                  Sortex-cleaned nigella seed with high thymoquinone content.
+                  Suitable for cold-press oil and nutraceutical use.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=black-cumin-seeds"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="product-card"
+              data-product-item
+              data-category="seeds"
+              data-name="Hulled Sesame Seeds"
+              data-code="SED-303"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-seeds.jpg"
+                  alt="Hulled Sesame Seeds"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#4a4a3a';
+                  "
+                />
+              </div>
+              <div class="product-card__body">
+                <p class="product-card__cat" data-i18n="categories.seeds.name">
+                  Seeds
+                </p>
+                <h3 class="product-card__name">Hulled Sesame Seeds</h3>
+                <p class="product-card__code">SED-303</p>
+                <p class="product-card__desc">
+                  Mechanically hulled white sesame at 99.95% purity. Washed and
+                  dried for tahini, bakery and confectionery lines.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=sesame-seeds"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <!-- ─── DEHYDRATED ─── -->
+            <div
+              class="product-card"
+              data-product-item
+              data-category="dehydrated"
+              data-name="Dehydrated Onion Flakes"
+              data-code="DHV-401"
+              data-featured="true"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-dehydrated.jpg"
+                  alt="Dehydrated Onion Flakes"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#4a3a1e';
+                  "
+                />
+                <span class="product-card__badge">Featured</span>
+              </div>
+              <div class="product-card__body">
+                <p
+                  class="product-card__cat"
+                  data-i18n="categories.dehydrated.name"
+                >
+                  Dehydrated Vegetables
+                </p>
+                <h3 class="product-card__name">Dehydrated Onion Flakes</h3>
+                <p class="product-card__code">DHV-401</p>
+                <p class="product-card__desc">
+                  White onion dried to 5% moisture in hot-air tunnels. Flake
+                  size 3–5 mm with strong pungency and fast rehydration 1:6.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=dehydrated-onion-flakes"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="product-card"
+              data-product-item
+              data-category="dehydrated"
+              data-name="Dehydrated Tomato Slices"
+              data-code="DHV-402"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-dehydrated.jpg"
+                  alt="Dehydrated Tomato Slices"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#4a1e1e';
+                  "
+                />
+              </div>
+              <div class="product-card__body">
+                <p
+                  class="product-card__cat"
+                  data-i18n="categories.dehydrated.name"
+                >
+                  Dehydrated Vegetables
+                </p>
+                <h3 class="product-card__name">Dehydrated Tomato Slices</h3>
+                <p class="product-card__code">DHV-402</p>
+                <p class="product-card__desc">
+                  Sun-ripened tomatoes sliced and dried without sulphites. Deep
+                  red colour and concentrated flavour for food processing.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=dehydrated-tomato-slices"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="product-card"
+              data-product-item
+              data-category="dehydrated"
+              data-name="Dehydrated Garlic Granules"
+              data-code="DHV-403"
+              data-featured="true"
+              data-reveal
+            >
+              <div class="product-card__img">
+                <img
+                  src="../assets/images/cat-dehydrated.jpg"
+                  alt="Dehydrated Garlic Granules"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background = '#3a3a2a';
+                  "
+                />
+                <span class="product-card__badge">Featured</span>
+              </div>
+              <div class="product-card__body">
+                <p
+                  class="product-card__cat"
+                  data-i18n="categories.dehydrated.name"
+                >
+                  Dehydrated Vegetables
+                </p>
+                <h3 class="product-card__name">Dehydrated Garlic Granules</h3>
+                <p class="product-card__code">DHV-403</p>
+                <p class="product-card__desc">
+                  Peeled white garlic dried and granulated to 8–16 mesh.
+                  Consistent pungency and allicin retention for industrial
+                  seasoning.
+                </p>
+                <a
+                  class="btn btn--outline btn--sm"
+                  href="product-details.html?product=garlic-granules"
+                  data-i18n="cta.details"
+                  >View Details</a
+                >
+              </div>
+            </div>
+          </div>
+          <!-- /product-grid -->
         </div>
       </section>
 
-      <section class="section section--dark">
-        <div class="container cta" data-reveal>
-          <h2 data-i18n="finalCta.title"></h2>
-          <p data-i18n="finalCta.text"></p>
-          <div class="cta__actions">
-            <a class="btn" href="contact.html" data-i18n="cta.contact"></a>
+      <!-- CTA -->
+      <section class="cta-section">
+        <div class="container">
+          <div class="cta-inner" data-reveal>
+            <div class="cta-content">
+              <p class="cta-overline">Need Samples?</p>
+              <h2 class="cta-title">
+                Request product specs,<br />samples, or <em>pricing</em>
+              </h2>
+              <p class="cta-text" data-i18n="finalCta.text">
+                Contact our export team for full specifications, sample packs,
+                and commercial terms.
+              </p>
+              <div class="cta-actions">
+                <a
+                  class="btn btn--gold btn--lg"
+                  href="contact.html"
+                  data-i18n="cta.inquiry"
+                  >Request a Sample</a
+                >
+              </div>
+            </div>
+            <div class="cta-aside">
+              <div class="cta-cert">
+                <span class="cta-cert__mark">48h</span
+                ><span class="cta-cert__label">Sample dispatch time</span>
+              </div>
+              <div class="cta-cert">
+                <span class="cta-cert__mark">COA</span
+                ><span class="cta-cert__label"
+                  >Full certificate of analysis</span
+                >
+              </div>
+              <div class="cta-cert">
+                <span class="cta-cert__mark">MOQ</span
+                ><span class="cta-cert__label">Flexible minimum orders</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="footer" id="site-footer"></footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      defer
-    ></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
     <script type="module" src="../js/main.js"></script>
+    <script type="module">
+      // Category tab switching (synced with filter chips from JS)
+      import { initProductsPage } from "../js/main.js";
+      document.addEventListener("DOMContentLoaded", () => {
+        const catTabs = document.querySelectorAll("[data-cat-tab]");
+        const chips = document.querySelector("[data-chips]");
+        catTabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            catTabs.forEach((t) => {
+              t.classList.remove("is-active");
+              t.setAttribute("aria-selected", "false");
+            });
+            tab.classList.add("is-active");
+            tab.setAttribute("aria-selected", "true");
+            // Sync with chip filter
+            const cat = tab.getAttribute("data-cat-tab");
+            const targetChip = chips?.querySelector(`[data-cat="${cat}"]`);
+            if (targetChip) targetChip.click();
+          });
+        });
+      });
+    </script>
   </body>
 </html>
