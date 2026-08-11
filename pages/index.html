@@ -3,32 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Precision Manufacturing & Export — [COMPANY NAME]</title>
+    <title>
+      El-Hamd Exports — Premium Egyptian Botanicals & Agricultural Export
+    </title>
     <meta
       name="description"
-      content="[COMPANY NAME] manufactures and exports industrial products for international B2B customers, with controlled production, in-house quality inspection and export-ready documentation."
+      content="El-Hamd Exports grows, processes and ships premium medicinal herbs, spices, seeds and dehydrated vegetables from Egypt to global food and wellness manufacturers."
     />
     <meta
       property="og:title"
-      content="Precision Manufacturing & Export — [COMPANY NAME]"
+      content="El-Hamd Exports — Premium Egyptian Botanicals"
     />
     <meta
       property="og:description"
-      content="Controlled production, strict quality inspection and export-ready supply for international B2B buyers."
+      content="Field-to-container traceable Egyptian herbs, spices, seeds and dehydrated vegetables for international B2B buyers."
     />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="index.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <script>
       try {
@@ -56,303 +48,826 @@
     <div class="drawer" id="site-drawer" aria-hidden="true"></div>
 
     <main id="main">
+      <!-- ═══════════════════ HERO ═══════════════════ -->
       <section class="hero">
         <div class="hero__media">
           <img
-            src="assets/images/factory-hero.jpg"
-            alt="Manufacturing facility exterior at dusk"
+            src="../assets/images/hero-fields.jpg"
+            alt="Egyptian herb fields at golden hour"
             width="1920"
-            height="1088"
+            height="1080"
             fetchpriority="high"
+            onerror="
+              this.onerror = null;
+              this.style.display = 'none';
+              this.parentElement.style.background =
+                'linear-gradient(135deg,#1a2e1d 0%,#2a4f31 100%)';
+            "
           />
         </div>
+        <div class="hero__overlay"></div>
         <div class="container hero__inner">
-          <p class="eyebrow" data-i18n="hero.eyebrow"></p>
-          <h1 class="hero__title" data-i18n="hero.title"></h1>
-          <p class="hero__text" data-i18n="hero.text"></p>
+          <p class="hero__eyebrow" data-i18n="hero.eyebrow">
+            Egypt's Premier Botanical Exporter
+          </p>
+          <h1 class="hero__title">
+            From Nile Valley <em>fields</em><br />to global markets
+          </h1>
+          <p class="hero__text" data-i18n="hero.text">
+            El-Hamd Exports grows, processes, and ships premium medicinal herbs,
+            aromatic plants, spices, seeds, and dehydrated vegetables to food,
+            tea, and wellness manufacturers worldwide.
+          </p>
           <div class="hero__actions">
-            <a class="btn" href="products.html" data-i18n="cta.explore"></a>
             <a
-              class="btn btn--onDark"
+              class="btn btn--gold btn--lg"
+              href="products.html"
+              data-i18n="cta.explore"
+              >Explore Products</a
+            >
+            <a
+              class="btn btn--outline-light btn--lg"
               href="contact.html"
               data-i18n="cta.contact"
-            ></a>
+              >Contact Our Team</a
+            >
           </div>
-          <dl class="hero__meta">
-            <div>
-              <dt data-i18n="contact.address"></dt>
-              <dd data-company="location"></dd>
+          <div class="hero__meta">
+            <div class="hero__meta-item">
+              <span class="hero__meta-label">Founded</span>
+              <span class="hero__meta-value">1998 · Fayoum, Egypt</span>
             </div>
-            <div>
-              <dt data-i18n="contact.phone"></dt>
-              <dd data-company="phone"></dd>
+            <div class="hero__meta-item">
+              <span class="hero__meta-label">Certifications</span>
+              <span class="hero__meta-value"
+                >ISO 22000 · HACCP · EU Organic</span
+              >
             </div>
-            <div>
-              <dt data-i18n="contact.email"></dt>
-              <dd data-company="email"></dd>
+            <div class="hero__meta-item">
+              <span class="hero__meta-label">Export Markets</span>
+              <span class="hero__meta-value">40+ Countries Worldwide</span>
             </div>
-          </dl>
+          </div>
+        </div>
+        <div class="hero__scroll" aria-hidden="true">
+          <div class="hero__scroll-line"></div>
         </div>
       </section>
 
-      <section class="section section--tight">
+      <!-- ═══════════════════ TRUST PILLARS ═══════════════════ -->
+      <section class="trust-section">
         <div class="container">
           <div class="section-head" data-reveal>
-            <p class="eyebrow" data-i18n="trust.title"></p>
-            <h2 data-i18n="trust.title"></h2>
-            <p data-i18n="trust.text"></p>
+            <p class="eyebrow" data-i18n="trust.title">
+              Built on process, not promises
+            </p>
+            <h2 data-i18n="trust.title">Built on process,<br />not promises</h2>
+            <p data-i18n="trust.text">
+              Every shipment leaves our facility inspected, certified, and
+              documented — traceable from field to container.
+            </p>
           </div>
-          <div class="values" data-reveal="fade">
-            <div class="value">
-              <span class="value__num">01</span>
-              <h3 data-i18n="trust.a"></h3>
-              <p data-i18n="trust.aText"></p>
+
+          <div class="trust-grid">
+            <div class="trust-pillar" data-reveal data-reveal-index="0">
+              <div class="trust-pillar__icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M9 12l2 2 4-4" />
+                  <path
+                    d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9Z"
+                  />
+                </svg>
+              </div>
+              <div class="trust-pillar__content">
+                <h3 data-i18n="trust.a">Field-to-Container Traceability</h3>
+                <p data-i18n="trust.aText">
+                  Every lot tracked from contracted farm through processing to
+                  your port.
+                </p>
+              </div>
             </div>
-            <div class="value">
-              <span class="value__num">02</span>
-              <h3 data-i18n="trust.b"></h3>
-              <p data-i18n="trust.bText"></p>
+            <div class="trust-pillar" data-reveal data-reveal-index="1">
+              <div class="trust-pillar__icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 2L3 7l9 5 9-5-9-5Z" />
+                  <path d="M3 17l9 5 9-5" />
+                  <path d="M3 12l9 5 9-5" />
+                </svg>
+              </div>
+              <div class="trust-pillar__content">
+                <h3 data-i18n="trust.b">Food Safety Certified</h3>
+                <p data-i18n="trust.bText">
+                  ISO 22000, HACCP, and EU Organic certification on every
+                  production line.
+                </p>
+              </div>
             </div>
-            <div class="value">
-              <span class="value__num">03</span>
-              <h3 data-i18n="trust.c"></h3>
-              <p data-i18n="trust.cText"></p>
+            <div class="trust-pillar" data-reveal data-reveal-index="2">
+              <div class="trust-pillar__icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z" />
+                </svg>
+              </div>
+              <div class="trust-pillar__content">
+                <h3 data-i18n="trust.c">Global Export Experience</h3>
+                <p data-i18n="trust.cText">
+                  Serving 40+ markets across Europe, the Gulf, Asia and the
+                  Americas.
+                </p>
+              </div>
             </div>
-            <div class="value">
-              <span class="value__num">04</span>
-              <h3 data-i18n="trust.d"></h3>
-              <p data-i18n="trust.dText"></p>
+            <div class="trust-pillar" data-reveal data-reveal-index="3">
+              <div class="trust-pillar__icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+              </div>
+              <div class="trust-pillar__content">
+                <h3 data-i18n="trust.d">Reliable Season Supply</h3>
+                <p data-i18n="trust.dText">
+                  Planned capacity, forward contracts, and stock policy for
+                  repeat B2B buyers.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Performance Panel -->
+          <div class="trust-interactive" data-reveal>
+            <div class="trust-tabs">
+              <div class="trust-tab" data-trust-tab="tab1">
+                <h4 data-i18n="trust.tab1">Traceability</h4>
+                <p data-i18n="trust.tab1Desc">
+                  Every export pallet linked to field, harvest date and drying
+                  batch.
+                </p>
+              </div>
+              <div class="trust-tab" data-trust-tab="tab2">
+                <h4 data-i18n="trust.tab2">Markets Served</h4>
+                <p data-i18n="trust.tab2Desc">
+                  Regular shipments to 40+ countries worldwide.
+                </p>
+              </div>
+              <div class="trust-tab" data-trust-tab="tab3">
+                <h4 data-i18n="trust.tab3">Organic Supply</h4>
+                <p data-i18n="trust.tab3Desc">
+                  Certified organic programmes across all product lines.
+                </p>
+              </div>
+              <div class="trust-tab" data-trust-tab="tab4">
+                <h4 data-i18n="trust.tab4">Lead Times</h4>
+                <p data-i18n="trust.tab4Desc">
+                  Container-ready in 14–21 days from order confirmation.
+                </p>
+              </div>
+            </div>
+            <div class="trust-panel">
+              <div class="trust-panel__content" data-trust-panel="tab1">
+                <div class="trust-panel__num">100<span>%</span></div>
+                <h3 class="trust-panel__title" data-i18n="trust.tab1Unit">
+                  Lot-level tracking
+                </h3>
+                <p class="trust-panel__text" data-i18n="trust.tab1Desc">
+                  Every export pallet links to the field block, harvest date,
+                  drying batch, and laboratory results — documentation sent with
+                  every shipment.
+                </p>
+              </div>
+              <div class="trust-panel__content" data-trust-panel="tab2">
+                <div class="trust-panel__num">40<span>+</span></div>
+                <h3 class="trust-panel__title" data-i18n="trust.tab2Unit">
+                  Export markets
+                </h3>
+                <p class="trust-panel__text" data-i18n="trust.tab2Desc">
+                  Regular shipments to the EU, UK, USA, GCC, Japan and South
+                  Africa. Our export team handles all documentation and customs
+                  requirements.
+                </p>
+              </div>
+              <div class="trust-panel__content" data-trust-panel="tab3">
+                <div class="trust-panel__num">60<span>%</span></div>
+                <h3 class="trust-panel__title" data-i18n="trust.tab3Unit">
+                  Organic-certified volume
+                </h3>
+                <p class="trust-panel__text" data-i18n="trust.tab3Desc">
+                  Certified organic programmes for chamomile, hibiscus,
+                  peppermint, fennel and black cumin. EU and USDA equivalence
+                  available.
+                </p>
+              </div>
+              <div class="trust-panel__content" data-trust-panel="tab4">
+                <div class="trust-panel__num">14<span>d</span></div>
+                <h3 class="trust-panel__title" data-i18n="trust.tab4Unit">
+                  –21 days to EU ports
+                </h3>
+                <p class="trust-panel__text" data-i18n="trust.tab4Desc">
+                  Standard container-ready within 14 days of order confirmation.
+                  Airfreight samples dispatched within 48 hours.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- ═══════════════════ PRODUCT CATEGORIES ═══════════════════ -->
+      <section class="section section--alt">
+        <div class="container">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow" data-i18n="categories.eyebrow">Product Range</p>
+            <h2 data-i18n="categories.title">Four core categories</h2>
+            <p data-i18n="categories.text">
+              Precision-processed botanicals and agricultural produce,
+              export-ready with full documentation.
+            </p>
+          </div>
+          <div class="cat-grid">
+            <a
+              class="cat-card"
+              href="products.html?category=herbs"
+              data-reveal
+              data-reveal-index="0"
+            >
+              <div class="cat-card__img">
+                <img
+                  src="../assets/images/cat-herbs.jpg"
+                  alt="Medicinal Herbs"
+                  loading="lazy"
+                  width="600"
+                  height="800"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background =
+                      'linear-gradient(135deg,#2a4f31,#1a2e1d)';
+                  "
+                />
+              </div>
+              <div class="cat-card__overlay"></div>
+              <div class="cat-card__body">
+                <span class="cat-card__label">01</span>
+                <h3 class="cat-card__name" data-i18n="categories.herbs.name">
+                  Medicinal Herbs
+                </h3>
+                <p class="cat-card__desc" data-i18n="categories.herbs.desc">
+                  Chamomile, hibiscus, peppermint and more — whole, cut or
+                  sifted.
+                </p>
+                <div class="cat-card__arrow">
+                  Explore
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <a
+              class="cat-card"
+              href="products.html?category=spices"
+              data-reveal
+              data-reveal-index="1"
+            >
+              <div class="cat-card__img">
+                <img
+                  src="../assets/images/cat-spices.jpg"
+                  alt="Spices & Seasonings"
+                  loading="lazy"
+                  width="600"
+                  height="800"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background =
+                      'linear-gradient(135deg,#5c3a1e,#3d2510)';
+                  "
+                />
+              </div>
+              <div class="cat-card__overlay"></div>
+              <div class="cat-card__body">
+                <span class="cat-card__label">02</span>
+                <h3 class="cat-card__name" data-i18n="categories.spices.name">
+                  Spices & Seasonings
+                </h3>
+                <p class="cat-card__desc" data-i18n="categories.spices.desc">
+                  Single-origin spices and custom blends, cold-milled for
+                  maximum aroma.
+                </p>
+                <div class="cat-card__arrow">
+                  Explore
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <a
+              class="cat-card"
+              href="products.html?category=seeds"
+              data-reveal
+              data-reveal-index="2"
+            >
+              <div class="cat-card__img">
+                <img
+                  src="../assets/images/cat-seeds.jpg"
+                  alt="Seeds"
+                  loading="lazy"
+                  width="600"
+                  height="800"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background =
+                      'linear-gradient(135deg,#3d4a1e,#252d12)';
+                  "
+                />
+              </div>
+              <div class="cat-card__overlay"></div>
+              <div class="cat-card__body">
+                <span class="cat-card__label">03</span>
+                <h3 class="cat-card__name" data-i18n="categories.seeds.name">
+                  Seeds
+                </h3>
+                <p class="cat-card__desc" data-i18n="categories.seeds.desc">
+                  Fennel, caraway, sesame and black cumin, sortex-cleaned to
+                  99.5%+.
+                </p>
+                <div class="cat-card__arrow">
+                  Explore
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <a
+              class="cat-card"
+              href="products.html?category=dehydrated"
+              data-reveal
+              data-reveal-index="3"
+            >
+              <div class="cat-card__img">
+                <img
+                  src="../assets/images/cat-dehydrated.jpg"
+                  alt="Dehydrated Vegetables"
+                  loading="lazy"
+                  width="600"
+                  height="800"
+                  onerror="
+                    this.onerror = null;
+                    this.parentElement.style.background =
+                      'linear-gradient(135deg,#4a3a1e,#2d2312)';
+                  "
+                />
+              </div>
+              <div class="cat-card__overlay"></div>
+              <div class="cat-card__body">
+                <span class="cat-card__label">04</span>
+                <h3
+                  class="cat-card__name"
+                  data-i18n="categories.dehydrated.name"
+                >
+                  Dehydrated Vegetables
+                </h3>
+                <p
+                  class="cat-card__desc"
+                  data-i18n="categories.dehydrated.desc"
+                >
+                  Onion, garlic, tomato and pepper — flakes, granules or powder.
+                </p>
+                <div class="cat-card__arrow">
+                  Explore
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════ INTRO / EDITORIAL ═══════════════════ -->
       <section class="section">
         <div class="container editorial">
           <div class="editorial__media" data-reveal>
             <img
-              src="assets/images/factory-production.jpg"
-              alt="Automated production line inside the plant"
+              src="../assets/images/factory-production.jpg"
+              alt="Processing facility interior"
               loading="lazy"
-              width="1600"
-              height="1104"
+              width="1200"
+              height="900"
+              onerror="
+                this.onerror = null;
+                this.parentElement.style.background =
+                  'linear-gradient(135deg,#1a2e1d,#2a4f31)';
+              "
             />
           </div>
-          <div data-reveal>
-            <p class="eyebrow" data-i18n="intro.eyebrow"></p>
-            <h2 data-i18n="intro.title"></h2>
-            <p data-i18n="intro.p1"></p>
-            <p data-i18n="intro.p2"></p>
+          <div class="editorial__content" data-reveal>
+            <p class="eyebrow">The Company</p>
+            <h2>A grower and exporter built for long-term supply</h2>
+            <p>
+              El-Hamd Exports has farmed and processed Egyptian botanicals since
+              1998. We contract directly with growers across 3,000+ feddans in
+              Fayoum, Qena and Assiut, control every processing step in our own
+              facility, and test every lot before it ships.
+            </p>
+            <p>
+              Quality at El-Hamd is a process, not a promise — documented,
+              repeatable, and auditable at every stage.
+            </p>
             <ul class="editorial__list">
-              <li data-i18n="intro.s1"></li>
-              <li data-i18n="intro.s2"></li>
-              <li data-i18n="intro.s3"></li>
+              <li>Own processing facility in Fayoum Agricultural Zone</li>
+              <li>
+                In-house laboratory — moisture, volatiles, microbiology,
+                pesticides
+              </li>
+              <li>Export-ready documentation for all major markets</li>
             </ul>
-            <div class="editorial__actions">
+            <div style="margin-top: 1.75rem">
               <a
-                class="btn btn--ghost"
+                class="btn btn--outline"
                 href="about.html"
                 data-i18n="cta.about"
-              ></a>
+                >Our Story</a
+              >
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section section--dark">
+      <!-- ═══════════════════ GLOBAL MARKETS ═══════════════════ -->
+      <section class="markets-section">
         <div class="container">
-          <div class="section-head" data-reveal>
-            <h2 data-i18n="stats.title"></h2>
-            <p data-i18n="stats.note"></p>
-          </div>
-          <div class="stats">
-            <div class="stat">
-              <div class="stat__value" data-count="25" data-suffix="+">0</div>
-              <div class="stat__label" data-i18n="stats.years"></div>
+          <div class="markets-inner">
+            <div data-reveal>
+              <p class="eyebrow" data-i18n="global.eyebrow">Global Presence</p>
+              <h2
+                style="
+                  font-size: var(--fs-h2);
+                  color: var(--on-dark);
+                  margin-bottom: 1rem;
+                "
+                data-i18n="global.title"
+              >
+                Serving international markets
+              </h2>
+              <p
+                style="
+                  color: var(--on-dark-muted);
+                  line-height: 1.75;
+                  max-width: 480px;
+                "
+                data-i18n="global.text"
+              >
+                Regular shipments to Europe, the Gulf, the Americas, and
+                Asia-Pacific — from our processing plant in Fayoum, Egypt.
+              </p>
+
+              <div class="markets-regions">
+                <div
+                  class="market-region"
+                  data-market-region="eu"
+                  data-reveal
+                  data-reveal-index="0"
+                >
+                  <span class="market-region__flag">🇪🇺</span>
+                  <div class="market-region__name" data-i18n="global.eu">
+                    European Union
+                  </div>
+                  <div class="market-region__count" data-i18n="global.eu_count">
+                    18 countries
+                  </div>
+                </div>
+                <div
+                  class="market-region"
+                  data-market-region="gulf"
+                  data-reveal
+                  data-reveal-index="1"
+                >
+                  <span class="market-region__flag">🌙</span>
+                  <div class="market-region__name" data-i18n="global.gulf">
+                    GCC & Middle East
+                  </div>
+                  <div
+                    class="market-region__count"
+                    data-i18n="global.gulf_count"
+                  >
+                    9 countries
+                  </div>
+                </div>
+                <div
+                  class="market-region"
+                  data-market-region="asia"
+                  data-reveal
+                  data-reveal-index="2"
+                >
+                  <span class="market-region__flag">🌏</span>
+                  <div class="market-region__name" data-i18n="global.asia">
+                    Asia-Pacific
+                  </div>
+                  <div
+                    class="market-region__count"
+                    data-i18n="global.asia_count"
+                  >
+                    8 countries
+                  </div>
+                </div>
+                <div
+                  class="market-region"
+                  data-market-region="americas"
+                  data-reveal
+                  data-reveal-index="3"
+                >
+                  <span class="market-region__flag">🌎</span>
+                  <div class="market-region__name" data-i18n="global.americas">
+                    Americas
+                  </div>
+                  <div
+                    class="market-region__count"
+                    data-i18n="global.americas_count"
+                  >
+                    6 countries
+                  </div>
+                </div>
+              </div>
+
+              <dl class="markets-stats" style="margin-top: 2.5rem">
+                <div class="markets-stat">
+                  <dt data-count="40" data-suffix="+">40+</dt>
+                  <dd data-i18n="global.r1">Export Markets</dd>
+                </div>
+                <div class="markets-stat">
+                  <dt data-count="5" data-suffix="">5</dt>
+                  <dd data-i18n="global.r2">Active Regions</dd>
+                </div>
+                <div class="markets-stat">
+                  <dt data-count="3" data-suffix="">3</dt>
+                  <dd data-i18n="global.r3">Shipping Ports</dd>
+                </div>
+              </dl>
             </div>
-            <div class="stat">
-              <div class="stat__value" data-count="40" data-suffix="+">0</div>
-              <div class="stat__label" data-i18n="stats.markets"></div>
-            </div>
-            <div class="stat">
-              <div class="stat__value" data-count="10" data-suffix="K+">0</div>
-              <div class="stat__label" data-i18n="stats.capacity"></div>
-            </div>
-            <div class="stat">
-              <div class="stat__value" data-count="50" data-suffix="+">0</div>
-              <div class="stat__label" data-i18n="stats.products"></div>
+
+            <!-- Stylised world map SVG -->
+            <div class="markets-map-wrapper" data-reveal>
+              <svg
+                class="markets-map-svg"
+                viewBox="0 0 800 420"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="World map showing El-Hamd export regions"
+              >
+                <!-- Simplified continent outlines -->
+                <!-- North America -->
+                <path
+                  d="M 80 80 L 200 70 L 220 100 L 240 130 L 210 160 L 190 200 L 160 220 L 130 200 L 100 170 L 70 140 L 60 110 Z"
+                />
+                <!-- South America -->
+                <path
+                  d="M 160 240 L 200 230 L 220 260 L 230 300 L 220 340 L 200 370 L 175 380 L 155 355 L 145 310 L 150 270 Z"
+                />
+                <!-- Europe -->
+                <path
+                  d="M 380 60 L 430 55 L 450 70 L 445 90 L 420 105 L 400 110 L 380 100 L 370 80 Z"
+                />
+                <!-- Africa -->
+                <path
+                  d="M 390 130 L 440 120 L 460 140 L 465 180 L 460 230 L 445 280 L 420 310 L 395 310 L 375 280 L 368 230 L 372 180 L 378 145 Z"
+                />
+                <!-- Middle East - highlighted -->
+                <path
+                  class="is-active"
+                  d="M 455 120 L 500 110 L 520 130 L 515 160 L 490 170 L 460 165 L 450 145 Z"
+                />
+                <!-- Egypt marker -->
+                <circle
+                  cx="448"
+                  cy="148"
+                  r="6"
+                  fill="var(--gold)"
+                  opacity="0.9"
+                />
+                <circle
+                  cx="448"
+                  cy="148"
+                  r="12"
+                  fill="var(--gold)"
+                  opacity="0.2"
+                />
+                <!-- Asia -->
+                <path
+                  d="M 520 60 L 650 50 L 700 80 L 710 120 L 690 150 L 640 160 L 580 155 L 540 140 L 515 110 L 515 80 Z"
+                />
+                <!-- Southeast Asia -->
+                <path
+                  d="M 640 170 L 690 165 L 710 185 L 700 210 L 670 215 L 648 200 Z"
+                />
+                <!-- Australia -->
+                <path
+                  d="M 640 260 L 720 250 L 750 280 L 745 330 L 710 345 L 665 335 L 640 305 L 638 275 Z"
+                />
+                <!-- Shipping routes -->
+                <path
+                  d="M 448 148 Q 400 100 390 80"
+                  stroke="var(--gold)"
+                  stroke-width="1"
+                  stroke-dasharray="4,4"
+                  fill="none"
+                  opacity="0.5"
+                />
+                <path
+                  d="M 448 148 Q 480 130 490 140"
+                  stroke="var(--gold)"
+                  stroke-width="1"
+                  stroke-dasharray="4,4"
+                  fill="none"
+                  opacity="0.5"
+                />
+                <path
+                  d="M 448 148 Q 560 100 580 90"
+                  stroke="var(--sage-light)"
+                  stroke-width="1"
+                  stroke-dasharray="4,4"
+                  fill="none"
+                  opacity="0.4"
+                />
+                <path
+                  d="M 448 148 Q 300 140 180 120"
+                  stroke="var(--sage-light)"
+                  stroke-width="1"
+                  stroke-dasharray="4,4"
+                  fill="none"
+                  opacity="0.3"
+                />
+              </svg>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
-        <div class="container">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow" data-i18n="categories.eyebrow"></p>
-            <h2 data-i18n="categories.title"></h2>
-            <p data-i18n="categories.text"></p>
-          </div>
-          <div class="grid grid--2" data-category-grid></div>
-        </div>
-      </section>
-
-      <section class="section section--alt">
-        <div class="container">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow" data-i18n="products.eyebrow"></p>
-            <h2 data-i18n="products.featuredTitle"></h2>
-            <p data-i18n="products.featuredText"></p>
-          </div>
-          <div class="grid grid--3" data-featured-grid></div>
-          <p class="mt-lg">
-            <a
-              class="btn btn--ghost"
-              href="products.html"
-              data-i18n="cta.explore"
-            ></a>
-          </p>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container editorial editorial--reverse">
-          <div class="editorial__media" data-reveal>
-            <img
-              src="assets/images/quality-control.jpg"
-              alt="Quality inspection in the in-house laboratory"
-              loading="lazy"
-              width="1600"
-              height="1104"
-            />
-          </div>
-          <div data-reveal>
-            <p class="eyebrow" data-i18n="about.capTitle"></p>
-            <h2 data-i18n="quality.title"></h2>
-            <p data-i18n="quality.text"></p>
-            <div class="editorial__actions">
-              <a
-                class="btn btn--ghost"
-                href="about.html"
-                data-i18n="cta.capabilities"
-              ></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--alt">
+      <!-- ═══════════════════ CERTIFICATIONS ═══════════════════ -->
+      <section class="section section--pale">
         <div class="container">
           <div class="section-head is-center" data-reveal>
-            <p class="eyebrow" data-i18n="certs.eyebrow"></p>
-            <h2 data-i18n="certs.title"></h2>
-            <p data-i18n="certs.text"></p>
+            <p class="eyebrow" data-i18n="certs.eyebrow">Certifications</p>
+            <h2 data-i18n="certs.title">Quality & Compliance</h2>
+            <p data-i18n="certs.text">
+              Our certifications reflect our commitment to food safety and
+              international standards.
+            </p>
           </div>
-          <div class="grid grid--4">
-            <div class="cert" data-reveal>
-              <span class="cert__mark">01</span>
-              <div>
-                <h3>[CERTIFICATION NAME]</h3>
-                <p>[CERTIFICATION DESCRIPTION]</p>
-              </div>
+          <div class="cert-grid">
+            <div class="cert-card" data-reveal data-reveal-index="0">
+              <span class="cert-card__mark">ISO 22000</span>
+              <h3>ISO 22000:2018</h3>
+              <p>
+                Food safety management across intake, processing and dispatch —
+                audited annually.
+              </p>
             </div>
-            <div class="cert" data-reveal>
-              <span class="cert__mark">02</span>
-              <div>
-                <h3>[CERTIFICATION NAME]</h3>
-                <p>[CERTIFICATION DESCRIPTION]</p>
-              </div>
+            <div class="cert-card" data-reveal data-reveal-index="1">
+              <span class="cert-card__mark">HACCP</span>
+              <h3>HACCP</h3>
+              <p>
+                Hazard analysis and critical control points applied on every
+                production line.
+              </p>
             </div>
-            <div class="cert" data-reveal>
-              <span class="cert__mark">03</span>
-              <div>
-                <h3>[CERTIFICATION NAME]</h3>
-                <p>[CERTIFICATION DESCRIPTION]</p>
-              </div>
+            <div class="cert-card" data-reveal data-reveal-index="2">
+              <span class="cert-card__mark">EU Organic</span>
+              <h3>EU Organic Certified</h3>
+              <p>
+                Certified organic herb and seed programmes fully compliant with
+                EU Regulation 2018/848.
+              </p>
             </div>
-            <div class="cert" data-reveal>
-              <span class="cert__mark">04</span>
-              <div>
-                <h3>[CERTIFICATION NAME]</h3>
-                <p>[CERTIFICATION DESCRIPTION]</p>
-              </div>
+            <div class="cert-card" data-reveal data-reveal-index="3">
+              <span class="cert-card__mark">GLOBALG.A.P.</span>
+              <h3>Global G.A.P.</h3>
+              <p>
+                Good agricultural practice audits on all contracted farms and
+                growing areas.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section section--dark">
-        <div class="container globe">
-          <div data-reveal>
-            <p class="eyebrow" data-i18n="global.eyebrow"></p>
-            <h2 data-i18n="global.title"></h2>
-            <p
-              class="muted"
-              style="margin-top: 1rem"
-              data-i18n="global.text"
-            ></p>
-            <dl class="globe__stats">
-              <div>
-                <dt>[NUMBER]</dt>
-                <dd data-i18n="global.r1"></dd>
-              </div>
-              <div>
-                <dt>[NUMBER]</dt>
-                <dd data-i18n="global.r2"></dd>
-              </div>
-              <div>
-                <dt>[NUMBER]</dt>
-                <dd data-i18n="global.r3"></dd>
-              </div>
-              <div>
-                <dt>[NUMBER]</dt>
-                <dd data-i18n="global.r4"></dd>
-              </div>
-            </dl>
-          </div>
-          <div class="globe__map" data-reveal aria-hidden="true"></div>
-        </div>
-      </section>
-
-      <section class="section">
+      <!-- ═══════════════════ PREMIUM CTA ═══════════════════ -->
+      <section class="cta-section">
         <div class="container">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow" data-i18n="news.eyebrow"></p>
-            <h2 data-i18n="news.homeTitle"></h2>
-            <p data-i18n="news.homeText"></p>
-          </div>
-          <div class="grid grid--3" data-news-teaser></div>
-          <p class="mt-lg">
-            <a
-              class="btn btn--ghost"
-              href="news.html"
-              data-i18n="cta.allNews"
-            ></a>
-          </p>
-        </div>
-      </section>
-
-      <section class="section section--dark">
-        <div class="container cta" data-reveal>
-          <h2 data-i18n="finalCta.title"></h2>
-          <p data-i18n="finalCta.text"></p>
-          <div class="cta__actions">
-            <a class="btn" href="contact.html" data-i18n="cta.contact"></a>
-            <a
-              class="btn btn--onDark"
-              href="products.html"
-              data-i18n="cta.explore"
-            ></a>
+          <div class="cta-inner" data-reveal>
+            <div class="cta-content">
+              <p class="cta-overline" data-i18n="finalCta.title">Partnership</p>
+              <h2 class="cta-title">
+                Let's build a <em>reliable</em><br />supply partnership
+              </h2>
+              <p class="cta-text" data-i18n="finalCta.text">
+                Contact our export team for product specifications, samples,
+                pricing, and shipping terms.
+              </p>
+              <div class="cta-actions">
+                <a
+                  class="btn btn--gold btn--lg"
+                  href="contact.html"
+                  data-i18n="cta.contact"
+                  >Contact Our Team</a
+                >
+                <a
+                  class="btn btn--outline-light"
+                  href="products.html"
+                  data-i18n="cta.explore"
+                  >Explore Products</a
+                >
+              </div>
+            </div>
+            <div class="cta-aside">
+              <div class="cta-cert">
+                <span class="cta-cert__mark">ISO 22000</span>
+                <span class="cta-cert__label">Food Safety Certified</span>
+              </div>
+              <div class="cta-cert">
+                <span class="cta-cert__mark">HACCP</span>
+                <span class="cta-cert__label">Production Controlled</span>
+              </div>
+              <div class="cta-cert">
+                <span class="cta-cert__mark">EU Organic</span>
+                <span class="cta-cert__label">Organic Programmes</span>
+              </div>
+              <div class="cta-cert">
+                <span class="cta-cert__mark">40+</span>
+                <span class="cta-cert__label">Export Markets Served</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="footer" id="site-footer"></footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      defer
-    ></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
     <script type="module" src="../js/main.js"></script>
   </body>
 </html>

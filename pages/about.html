@@ -3,29 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>About the Company — [COMPANY NAME]</title>
+    <title>About Us — El-Hamd Exports</title>
     <meta
       name="description"
-      content="Company story, manufacturing capabilities, quality control process, certifications and global presence of [COMPANY NAME]."
+      content="El-Hamd Exports — Egypt's trusted grower and exporter of medicinal herbs, spices, seeds and dehydrated vegetables since 1998."
     />
-    <meta property="og:title" content="About the Company — [COMPANY NAME]" />
-    <meta
-      property="og:description"
-      content="Manufacturing capabilities, quality control and global reach."
-    />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="about.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <script>
       try {
@@ -53,267 +37,153 @@
     <div class="drawer" id="site-drawer" aria-hidden="true"></div>
 
     <main id="main">
+      <!-- PAGE HERO -->
       <section class="page-hero">
         <div class="page-hero__media">
           <img
-            src="assets/images/factory-hero.jpg"
-            alt=""
+            src="../assets/images/factory-hero.jpg"
+            alt="El-Hamd processing facility"
             width="1920"
-            height="1088"
+            height="1080"
+            onerror="
+              this.onerror = null;
+              this.parentElement.style.background =
+                'linear-gradient(135deg,#1a2e1d,#111a13)';
+            "
           />
         </div>
+        <div class="page-hero__overlay"></div>
         <div class="container page-hero__inner">
           <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="index.html" data-i18n="breadcrumb.home"></a
-            ><span class="sep">›</span><span data-i18n="nav.about"></span>
+            <a href="index.html" data-i18n="breadcrumb.home">Home</a>
+            <span class="sep">›</span>
+            <span data-i18n="nav.about">About</span>
           </nav>
-          <p class="eyebrow" data-i18n="about.eyebrow"></p>
-          <h1 data-i18n="about.title"></h1>
-          <p data-i18n="about.lead"></p>
+          <p
+            class="eyebrow"
+            style="color: var(--gold-light)"
+            data-i18n="about.eyebrow"
+          >
+            About Us
+          </p>
+          <h1 data-i18n="about.title">
+            Egypt's trusted botanical exporter since 1998
+          </h1>
+          <p data-i18n="about.lead">
+            El-Hamd Exports grows, processes and ships premium herbs, spices,
+            seeds and dehydrated vegetables from Egypt's Nile Valley to food and
+            wellness manufacturers worldwide.
+          </p>
         </div>
       </section>
 
-      <section class="section">
-        <div class="container editorial">
-          <div class="editorial__media" data-reveal>
-            <img
-              src="assets/images/factory-production.jpg"
-              alt="Production line"
-              loading="lazy"
-              width="1600"
-              height="1104"
-            />
-          </div>
-          <div data-reveal>
-            <h2 data-i18n="about.storyTitle"></h2>
-            <p data-i18n="about.storyP1"></p>
-            <p data-i18n="about.storyP2"></p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--alt">
-        <div class="container grid grid--3">
-          <div data-reveal>
-            <p class="eyebrow" data-i18n="about.missionTitle"></p>
-            <p class="lead" data-i18n="about.mission"></p>
-          </div>
-          <div data-reveal>
-            <p class="eyebrow" data-i18n="about.visionTitle"></p>
-            <p class="lead" data-i18n="about.vision"></p>
-          </div>
-          <div data-reveal>
-            <p class="eyebrow" data-i18n="about.valuesTitle"></p>
-            <p class="lead" data-i18n="about.values"></p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow" data-i18n="about.capTitle"></p>
-            <h2 data-i18n="about.capTitle"></h2>
-            <p data-i18n="about.capText"></p>
-          </div>
-        </div>
-        <div
-          class="container editorial"
-          style="margin-bottom: var(--section-y)"
-        >
-          <div class="editorial__media" data-reveal>
-            <img
-              src="assets/images/factory-production.jpg"
-              alt="Production lines"
-              loading="lazy"
-              width="1600"
-              height="1104"
-            />
-          </div>
-          <div data-reveal>
-            <h3
-              style="font-size: var(--fs-h3)"
-              data-i18n="about.cap1Title"
-            ></h3>
-            <p
-              class="muted"
-              style="margin-top: 1rem"
-              data-i18n="about.cap1Text"
-            ></p>
-          </div>
-        </div>
-        <div
-          class="container editorial editorial--reverse"
-          style="margin-bottom: var(--section-y)"
-        >
-          <div class="editorial__media" data-reveal>
-            <img
-              src="assets/images/quality-control.jpg"
-              alt="Quality inspection"
-              loading="lazy"
-              width="1600"
-              height="1104"
-            />
-          </div>
-          <div data-reveal>
-            <h3
-              style="font-size: var(--fs-h3)"
-              data-i18n="about.cap2Title"
-            ></h3>
-            <p
-              class="muted"
-              style="margin-top: 1rem"
-              data-i18n="about.cap2Text"
-            ></p>
-          </div>
-        </div>
-        <div class="container editorial">
-          <div class="editorial__media" data-reveal>
-            <img
-              src="assets/images/logistics.jpg"
-              alt="Warehouse and loading dock"
-              loading="lazy"
-              width="1600"
-              height="1104"
-            />
-          </div>
-          <div data-reveal>
-            <h3
-              style="font-size: var(--fs-h3)"
-              data-i18n="about.cap3Title"
-            ></h3>
-            <p
-              class="muted"
-              style="margin-top: 1rem"
-              data-i18n="about.cap3Text"
-            ></p>
-          </div>
-        </div>
-      </section>
-
+      <!-- ABOUT / MISSION / VISION — Three Pillars -->
       <section class="section section--dark">
         <div class="container">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow" data-i18n="quality.eyebrow"></p>
-            <h2 data-i18n="quality.title"></h2>
-            <p data-i18n="quality.text"></p>
-          </div>
-          <div class="process" data-reveal="fade">
-            <div class="process__step">
-              <h3 data-i18n="quality.s1"></h3>
-              <p data-i18n="quality.s1Text"></p>
+          <div class="about-hero-trio">
+            <div
+              class="about-pillar about-pillar--about"
+              data-reveal
+              data-reveal-index="0"
+            >
+              <div class="about-pillar__label" data-i18n="about.eyebrow">
+                About Us
+              </div>
+              <h2>Who We Are</h2>
+              <p>
+                Founded in 1998 as a family farm in the Fayoum basin, El-Hamd
+                Exports has grown into one of Egypt's most trusted exporters of
+                medicinal plants and agricultural produce. We farm and contract
+                over 3,000 feddans, operate our own processing facility, and
+                ship to 40+ markets worldwide.
+              </p>
+              <div class="about-pillar__deco"></div>
             </div>
-            <div class="process__step">
-              <h3 data-i18n="quality.s2"></h3>
-              <p data-i18n="quality.s2Text"></p>
+
+            <div
+              class="about-pillar about-pillar--mission"
+              data-reveal
+              data-reveal-index="1"
+            >
+              <div class="about-pillar__label" data-i18n="about.missionTitle">
+                Mission
+              </div>
+              <h2 data-i18n="about.missionTitle">Our Mission</h2>
+              <p data-i18n="about.mission">
+                To deliver clean, traceable Egyptian botanicals that
+                manufacturers can source with confidence — season after season.
+              </p>
+              <div class="about-pillar__deco"></div>
             </div>
-            <div class="process__step">
-              <h3 data-i18n="quality.s3"></h3>
-              <p data-i18n="quality.s3Text"></p>
-            </div>
-            <div class="process__step">
-              <h3 data-i18n="quality.s4"></h3>
-              <p data-i18n="quality.s4Text"></p>
-            </div>
-            <div class="process__step">
-              <h3 data-i18n="quality.s5"></h3>
-              <p data-i18n="quality.s5Text"></p>
-            </div>
-            <div class="process__step">
-              <h3 data-i18n="quality.s6"></h3>
-              <p data-i18n="quality.s6Text"></p>
+
+            <div
+              class="about-pillar about-pillar--vision"
+              data-reveal
+              data-reveal-index="2"
+            >
+              <div class="about-pillar__label" data-i18n="about.visionTitle">
+                Vision
+              </div>
+              <h2 data-i18n="about.visionTitle">Our Vision</h2>
+              <p data-i18n="about.vision">
+                To be the most trusted and sustainable source of medicinal
+                plants and agricultural produce from the Nile Valley.
+              </p>
+              <div class="about-pillar__deco"></div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
+      <!-- CTA -->
+      <section class="cta-section">
         <div class="container">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow" data-i18n="certs.eyebrow"></p>
-            <h2 data-i18n="certs.title"></h2>
-            <p data-i18n="certs.text"></p>
-          </div>
-          <div class="grid grid--4">
-            <div class="cert" data-reveal>
-              <span class="cert__mark">01</span>
-              <div>
-                <h3>[CERTIFICATION NAME]</h3>
-                <p>[CERTIFICATION DESCRIPTION]</p>
+          <div class="cta-inner" data-reveal>
+            <div class="cta-content">
+              <p class="cta-overline">Work With Us</p>
+              <h2 class="cta-title">
+                Ready to source from <em>Egypt's finest</em> fields?
+              </h2>
+              <p class="cta-text" data-i18n="finalCta.text">
+                Contact our export team for specifications, samples, pricing,
+                and shipping terms.
+              </p>
+              <div class="cta-actions">
+                <a
+                  class="btn btn--gold btn--lg"
+                  href="contact.html"
+                  data-i18n="cta.contact"
+                  >Contact Our Team</a
+                >
+                <a
+                  class="btn btn--outline-light"
+                  href="products.html"
+                  data-i18n="cta.explore"
+                  >Explore Products</a
+                >
               </div>
             </div>
-            <div class="cert" data-reveal>
-              <span class="cert__mark">02</span>
-              <div>
-                <h3>[CERTIFICATION NAME]</h3>
-                <p>[CERTIFICATION DESCRIPTION]</p>
+            <div class="cta-aside">
+              <div class="cta-cert">
+                <span class="cta-cert__mark">1998</span
+                ><span class="cta-cert__label">Year Founded</span>
+              </div>
+              <div class="cta-cert">
+                <span class="cta-cert__mark">3,000+</span
+                ><span class="cta-cert__label">Feddans Contracted</span>
+              </div>
+              <div class="cta-cert">
+                <span class="cta-cert__mark">40+</span
+                ><span class="cta-cert__label">Export Markets</span>
               </div>
             </div>
-            <div class="cert" data-reveal>
-              <span class="cert__mark">03</span>
-              <div>
-                <h3>[CERTIFICATION NAME]</h3>
-                <p>[CERTIFICATION DESCRIPTION]</p>
-              </div>
-            </div>
-            <div class="cert" data-reveal>
-              <span class="cert__mark">04</span>
-              <div>
-                <h3>[CERTIFICATION NAME]</h3>
-                <p>[CERTIFICATION DESCRIPTION]</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--alt">
-        <div class="container">
-          <div class="section-head" data-reveal>
-            <h2 data-i18n="about.whyTitle"></h2>
-          </div>
-          <div class="values">
-            <div class="value">
-              <span class="value__num">01</span>
-              <h3 data-i18n="about.why1"></h3>
-            </div>
-            <div class="value">
-              <span class="value__num">02</span>
-              <h3 data-i18n="about.why2"></h3>
-            </div>
-            <div class="value">
-              <span class="value__num">03</span>
-              <h3 data-i18n="about.why3"></h3>
-            </div>
-            <div class="value">
-              <span class="value__num">04</span>
-              <h3 data-i18n="about.why4"></h3>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--dark">
-        <div class="container cta" data-reveal>
-          <h2 data-i18n="finalCta.title"></h2>
-          <p data-i18n="finalCta.text"></p>
-          <div class="cta__actions">
-            <a class="btn" href="contact.html" data-i18n="cta.contact"></a>
-            <a
-              class="btn btn--onDark"
-              href="products.html"
-              data-i18n="cta.explore"
-            ></a>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="footer" id="site-footer"></footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      defer
-    ></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
     <script type="module" src="../js/main.js"></script>
   </body>
 </html>
