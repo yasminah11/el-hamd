@@ -71,7 +71,7 @@
             Egypt's Premier Botanical Exporter
           </p>
           <h1 class="hero__title">
-            From Nile Valley <em>fields</em><br />to global markets
+            From Nile Valley fields <br />to global markets
           </h1>
           <p class="hero__text" data-i18n="hero.text">
             El-Hamd Exports grows, processes, and ships premium medicinal herbs,
@@ -780,6 +780,35 @@
           </div>
           <div class="cert-grid">
             <div class="cert-card" data-reveal data-reveal-index="0">
+              <div
+                class="cert-card__media"
+                data-lightbox="../assets/images/cert-iso.jpg"
+                data-caption="ISO 22000:2018 Certificate"
+              >
+                <img
+                  src="../assets/images/cert-iso.jpg"
+                  alt="ISO 22000 Certificate"
+                  loading="lazy"
+                  onerror="
+                    this.onerror = null;
+                    this.src = '../assets/images/factory-production.jpg';
+                  "
+                />
+                <div class="cert-card__zoom-hint">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                    <path d="M11 8v6M8 11h6" />
+                  </svg>
+                </div>
+              </div>
               <span class="cert-card__mark">ISO 22000</span>
               <h3>ISO 22000:2018</h3>
               <p>
@@ -788,6 +817,35 @@
               </p>
             </div>
             <div class="cert-card" data-reveal data-reveal-index="1">
+              <div
+                class="cert-card__media"
+                data-lightbox="../assets/images/cert-haccp.jpg"
+                data-caption="HACCP Certificate"
+              >
+                <img
+                  src="../assets/images/cert-haccp.jpg"
+                  alt="HACCP Certificate"
+                  loading="lazy"
+                  onerror="
+                    this.onerror = null;
+                    this.src = '../assets/images/factory-production.jpg';
+                  "
+                />
+                <div class="cert-card__zoom-hint">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                    <path d="M11 8v6M8 11h6" />
+                  </svg>
+                </div>
+              </div>
               <span class="cert-card__mark">HACCP</span>
               <h3>HACCP</h3>
               <p>
@@ -796,6 +854,35 @@
               </p>
             </div>
             <div class="cert-card" data-reveal data-reveal-index="2">
+              <div
+                class="cert-card__media"
+                data-lightbox="../assets/images/cert-organic.jpg"
+                data-caption="EU Organic Certificate"
+              >
+                <img
+                  src="../assets/images/cert-organic.jpg"
+                  alt="EU Organic Certificate"
+                  loading="lazy"
+                  onerror="
+                    this.onerror = null;
+                    this.src = '../assets/images/factory-production.jpg';
+                  "
+                />
+                <div class="cert-card__zoom-hint">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                    <path d="M11 8v6M8 11h6" />
+                  </svg>
+                </div>
+              </div>
               <span class="cert-card__mark">EU Organic</span>
               <h3>EU Organic Certified</h3>
               <p>
@@ -804,6 +891,35 @@
               </p>
             </div>
             <div class="cert-card" data-reveal data-reveal-index="3">
+              <div
+                class="cert-card__media"
+                data-lightbox="../assets/images/cert-gap.jpg"
+                data-caption="Global G.A.P. Certificate"
+              >
+                <img
+                  src="../assets/images/cert-gap.jpg"
+                  alt="Global G.A.P. Certificate"
+                  loading="lazy"
+                  onerror="
+                    this.onerror = null;
+                    this.src = '../assets/images/factory-production.jpg';
+                  "
+                />
+                <div class="cert-card__zoom-hint">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                    <path d="M11 8v6M8 11h6" />
+                  </svg>
+                </div>
+              </div>
               <span class="cert-card__mark">GLOBALG.A.P.</span>
               <h3>Global G.A.P.</h3>
               <p>
@@ -815,14 +931,55 @@
         </div>
       </section>
 
+      <!-- ═══════════════════ LIGHTBOX MODAL ═══════════════════ -->
+      <div
+        class="cert-lightbox"
+        id="cert-lightbox"
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="cert-lightbox__overlay" data-lightbox-close></div>
+        <div class="cert-lightbox__container">
+          <button
+            type="button"
+            class="cert-lightbox__close"
+            data-lightbox-close
+            aria-label="Close modal"
+          >
+            &times;
+          </button>
+          <img
+            src=""
+            alt=""
+            class="cert-lightbox__img"
+            id="cert-lightbox-img"
+          />
+          <p class="cert-lightbox__caption" id="cert-lightbox-caption"></p>
+        </div>
+      </div>
+
       <!-- ═══════════════════ PREMIUM CTA ═══════════════════ -->
       <section class="cta-section">
+        <div class="cta-wave" aria-hidden="true">
+          <svg
+            viewBox="0 0 1440 120"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0 0C240 70 480 110 720 70C960 30 1200 70 1440 40V120H0V0Z"
+              fill="var(--cta-bg)"
+            />
+          </svg>
+        </div>
         <div class="container">
-          <div class="cta-inner" data-reveal>
+          <div class="cta-inner is-centered" data-reveal>
             <div class="cta-content">
               <p class="cta-overline" data-i18n="finalCta.title">Partnership</p>
               <h2 class="cta-title">
-                Let's build a <em>reliable</em><br />supply partnership
+                Let's build a reliable<br />supply partnership
               </h2>
               <p class="cta-text" data-i18n="finalCta.text">
                 Contact our export team for product specifications, samples,
@@ -836,29 +993,11 @@
                   >Contact Our Team</a
                 >
                 <a
-                  class="btn btn--outline-light"
+                  class="btn btn--outline-light btn--lg"
                   href="products.html"
                   data-i18n="cta.explore"
                   >Explore Products</a
                 >
-              </div>
-            </div>
-            <div class="cta-aside">
-              <div class="cta-cert">
-                <span class="cta-cert__mark">ISO 22000</span>
-                <span class="cta-cert__label">Food Safety Certified</span>
-              </div>
-              <div class="cta-cert">
-                <span class="cta-cert__mark">HACCP</span>
-                <span class="cta-cert__label">Production Controlled</span>
-              </div>
-              <div class="cta-cert">
-                <span class="cta-cert__mark">EU Organic</span>
-                <span class="cta-cert__label">Organic Programmes</span>
-              </div>
-              <div class="cta-cert">
-                <span class="cta-cert__mark">40+</span>
-                <span class="cta-cert__label">Export Markets Served</span>
               </div>
             </div>
           </div>
